@@ -99,7 +99,7 @@
         .nav-right {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
             z-index: 102;
         }
 
@@ -146,27 +146,48 @@
             100% { background-position: 250% center; }
         }
 
-        /* Profile Avatar */
+        /* --- CONTINUOUS ROTATING NEON RING FOR PROFILE AVATAR --- */
         .profile-badge-wrapper {
             position: relative;
             z-index: 110;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            padding: 2.5px;
+            background: conic-gradient(from 0deg, #c084fc, #818cf8, #38bdf8, #f472b6, #c084fc);
+            animation: spinProfileRing 4s linear infinite;
+            box-shadow: 0 0 14px rgba(192, 132, 252, 0.55);
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .profile-badge-wrapper:hover {
+            transform: scale(1.12);
+            box-shadow: 0 0 22px rgba(192, 132, 252, 0.9), 0 0 35px rgba(56, 189, 248, 0.5);
+        }
+
+        @keyframes spinProfileRing {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         .profile-avatar-thumb {
-            width: 40px;
-            height: 40px;
+            width: 100%;
+            height: 100%;
             border-radius: 50%;
             object-fit: cover;
-            border: 1.5px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-            cursor: pointer;
-            transition: transform 0.3s ease, border-color 0.3s ease;
             display: block;
+            background: #0a0a14;
+            /* Counter-rotate inside so picture stays right-side up */
+            animation: unspinProfileRing 4s linear infinite;
         }
 
-        .profile-avatar-thumb:hover {
-            transform: scale(1.08);
-            border-color: #ffffff;
+        @keyframes unspinProfileRing {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(-360deg); }
         }
 
         .profile-popover {
@@ -179,11 +200,11 @@
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             pointer-events: none;
             z-index: 120;
-            background: rgba(10, 10, 18, 0.92);
+            background: rgba(10, 10, 18, 0.94);
             padding: 8px;
             border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), 0 0 20px rgba(168, 85, 247, 0.25);
+            border: 1px solid rgba(192, 132, 252, 0.35);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), 0 0 24px rgba(168, 85, 247, 0.35);
             -webkit-backdrop-filter: blur(14px);
             backdrop-filter: blur(14px);
             text-align: center;
@@ -211,7 +232,7 @@
             font-weight: 500;
         }
 
-        /* --- CONTACT TRIGGER & DROPDOWN (GLASS & SUBTLE FLOW) --- */
+        /* --- CONTACT TRIGGER (LIGHT GLASS + SUBTLE COLOR FLOW TEXT) --- */
         .contact-dropdown-container {
             position: relative;
             display: inline-block;
@@ -219,9 +240,8 @@
 
         .contact-btn-trigger {
             cursor: pointer;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(192, 132, 252, 0.25);
-            color: #ffffff;
+            background: rgba(18, 18, 30, 0.55);
+            border: 1px solid rgba(192, 132, 252, 0.3);
             font-weight: 600;
             font-size: 0.86rem;
             display: flex;
@@ -232,14 +252,33 @@
             -webkit-backdrop-filter: blur(8px);
             backdrop-filter: blur(8px);
             transition: all 0.25s ease;
-            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .contact-btn-trigger span {
+            background-image: linear-gradient(
+                90deg, 
+                #ffffff 0%, 
+                #c084fc 35%, 
+                #818cf8 70%, 
+                #ffffff 100%
+            );
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: subtleColorShift 6s linear infinite;
         }
 
         .contact-btn-trigger:hover {
             background: var(--glass-hover-50);
-            border-color: rgba(192, 132, 252, 0.6);
-            box-shadow: 0 4px 20px rgba(168, 85, 247, 0.35);
+            border-color: rgba(192, 132, 252, 0.7);
+            box-shadow: 0 4px 20px rgba(168, 85, 247, 0.4);
             transform: translateY(-2px);
+        }
+
+        .contact-btn-trigger:hover span {
+            -webkit-text-fill-color: #ffffff;
         }
 
         .dropdown-menu {
@@ -414,7 +453,7 @@
             text-shadow: 0 0 12px rgba(192, 132, 252, 0.5), 0 2px 10px rgba(0, 0, 0, 0.9);
         }
 
-        /* --- SUBTLE, TEMPTING GLASS CONTACT PILLS (NOT TOO LOUD, EASY TO READ ON HOVER) --- */
+        /* Hero Contact Pills */
         .contact-links {
             display: flex;
             flex-wrap: wrap;
@@ -434,7 +473,7 @@
             padding: 8px 20px;
             border-radius: 50px;
             background: rgba(18, 18, 30, 0.55);
-            border: 1px solid rgba(192, 132, 252, 0.22);
+            border: 1px solid rgba(192, 132, 252, 0.25);
             -webkit-backdrop-filter: blur(8px);
             backdrop-filter: blur(8px);
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08);
@@ -468,7 +507,7 @@
 
         .contact-links a:hover {
             background: var(--glass-hover-50);
-            border-color: rgba(192, 132, 252, 0.6);
+            border-color: rgba(192, 132, 252, 0.65);
             transform: translateY(-2px);
             box-shadow: 0 6px 22px rgba(168, 85, 247, 0.4), 0 0 12px rgba(129, 140, 248, 0.25);
         }
@@ -606,7 +645,7 @@
             margin-bottom: 12px;
         }
 
-        /* Pure Image Logo with smooth pop */
+        /* Pure Image Logo */
         .entity-logo {
             width: 52px;
             height: 52px;
@@ -645,7 +684,7 @@
             display: inline-block;
         }
 
-        /* Color-Flow Text Links */
+        /* --- CONTINUOUS COLOR-FLOWING TEXT LINKS --- */
         .entity-link {
             display: inline;
             background: linear-gradient(
@@ -702,7 +741,7 @@
             margin-top: 16px;
         }
 
-        /* --- REFINED LIGHT GLASS ACTION BUTTONS ("VIEW LIVE APP" & "VIEW PAPER") --- */
+        /* Light Glass Action Buttons ("View Live App" & "View Paper") */
         .btn {
             display: inline-flex;
             align-items: center;
@@ -1048,7 +1087,7 @@
         <div class="nav-right">
             <div class="contact-dropdown-container">
                 <div class="contact-btn-trigger">
-                    Contact Me ▾
+                    <span>Contact Me ▾</span>
                 </div>
                 <div class="dropdown-menu">
                     <a href="https://linkedin.com/in/adarshgandla" target="_blank" rel="noopener noreferrer" class="primary-link" onclick="handleLinkedInClick(event)">
@@ -1083,10 +1122,11 @@
                 </div>
             </div>
 
+            <!-- Profile Avatar with Rotating Neon Ring -->
             <div class="profile-badge-wrapper">
-                <img src="profile.jpeg" alt="Adarsh Gandla" class="profile-avatar-thumb" onerror="this.onerror=null;">
+                <img src="profile.jpeg" alt="Adarsh Gandla" class="profile-avatar-thumb" onerror="this.onerror=null; this.src='profile.jpg';">
                 <div class="profile-popover">
-                    <img src="profile.jpeg" alt="Adarsh Gandla" onerror="this.onerror=null;">
+                    <img src="profile.jpeg" alt="Adarsh Gandla" onerror="this.onerror=null; this.src='profile.jpg';">
                     <span>Adarsh Gandla</span>
                 </div>
             </div>
@@ -1189,13 +1229,20 @@
                     </div>
                 </div>
                 <ul>
-                    <li><strong>Publication:</strong> <em>Deep Learning-Based Route Optimization and Demand Forecasting for Smart Logistics</em> published in the International Journal of Emerging Research in Science, Engineering, and Management (IJERSEM).</li>
+                    <li>
+                        <strong>Publication:</strong> 
+                        <!-- Restored Colorful Dynamic Link on the Paper Title -->
+                        <a href="https://ijersem.com/72319-2/" target="_blank" rel="noopener noreferrer" class="entity-link">
+                            <em>Deep Learning-Based Route Optimization and Demand Forecasting for Smart Logistics</em>
+                        </a> 
+                        published in the International Journal of Emerging Research in Science, Engineering, and Management (IJERSEM).
+                    </li>
                     <li>Architected a cloud-native, software-only logistics optimization system to solve complex routing and demand prediction challenges for delivery networks.</li>
                     <li>Implemented a route optimization engine in Python using Google OR-Tools to model and solve TSP/VRP style routing scenarios for cost, distance minimization, and eco-efficiency.</li>
                     <li>Built and trained an LSTM-based demand forecasting model in TensorFlow to predict product demand across locations and time periods.</li>
                 </ul>
 
-                <!-- Side-by-Side Noticeable Action Buttons -->
+                <!-- Side-by-Side Action Buttons with Identical Styling -->
                 <div class="card-btn-group">
                     <a href="https://smart-logistics-v4.vercel.app" target="_blank" class="btn">
                         <span>🚀 View Live App</span>
