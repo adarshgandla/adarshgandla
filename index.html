@@ -360,7 +360,7 @@
             text-shadow: 0 2px 14px rgba(0, 0, 0, 0.95);
         }
 
-        /* --- BALANCED, CLEAN & NOTICEABLE HERO BUTTONS --- */
+        /* --- BALANCED, CLEAN HERO CONTACT BUTTONS --- */
         .contact-links {
             display: flex;
             flex-wrap: wrap;
@@ -375,7 +375,7 @@
             gap: 7px;
             color: #f1f5f9;
             text-decoration: none;
-            background: rgba(10, 10, 20, 0.28); /* Lightweight dark frost */
+            background: rgba(10, 10, 20, 0.28);
             border: 1px solid rgba(255, 255, 255, 0.18);
             padding: 6px 15px;
             border-radius: 50px;
@@ -527,7 +527,7 @@
             z-index: 2;
         }
 
-        /* Unified Card Header with Entity Logo */
+        /* Unified Card Header with Zero Padding Loss Logo */
         .card-entity-header {
             display: flex;
             align-items: center;
@@ -536,15 +536,17 @@
         }
 
         .entity-logo {
-            width: 52px;
-            height: 52px;
+            width: 58px;
+            height: 58px;
             border-radius: 12px;
             background: #ffffff;
-            padding: 5px;
+            padding: 0;
             object-fit: contain;
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.28);
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
             flex-shrink: 0;
+            overflow: hidden;
+            display: block;
             transition: transform 0.25s ease;
         }
 
@@ -1132,7 +1134,7 @@
         <section id="education" class="fade-in">
             <h3>Education & Certifications</h3>
 
-            <!-- Siddhartha Institute -->
+            <!-- Siddhartha Institute (SISTK) -->
             <div class="card">
                 <div class="card-entity-header">
                     <a href="https://sistk.org/" target="_blank" rel="noopener noreferrer">
