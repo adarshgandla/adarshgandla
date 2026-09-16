@@ -1640,7 +1640,7 @@
                 if (!isAutoScrolling) return;
 
                 if (window.scrollY < maxScroll - 4) {
-                    window.scrollBy(0, scrollSpeed);
+                    window.scrollBy(1.6, scrollSpeed);
                     requestAnimationFrame(step);
                 } else {
                     isAutoScrolling = false;
