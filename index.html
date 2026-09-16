@@ -1634,13 +1634,13 @@
             showToast("✨ Auto-scrolling due to inactivity — interact anytime to pause");
 
             const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-            const scrollSpeed = 1.6; // Smooth reading pace
+            const scrollSpeed = 2; // Smooth reading pace
 
             function step() {
                 if (!isAutoScrolling) return;
 
                 if (window.scrollY < maxScroll - 4) {
-                    window.scrollBy(0, scrollSpeed);
+                    window.scrollBy(2, scrollSpeed);
                     requestAnimationFrame(step);
                 } else {
                     isAutoScrolling = false;
