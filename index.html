@@ -13,7 +13,7 @@
             --accent-1: #6366f1;
             --accent-2: #a855f7;
 
-            /* 95% Transparent Glass */
+            /* 95% Transparent Glass for Cards */
             --glass-bg-95: rgba(255, 255, 255, 0.05);
             --glass-border: rgba(255, 255, 255, 0.12);
 
@@ -193,7 +193,7 @@
             font-weight: 500;
         }
 
-        /* Matched Neutral Glass Contact Me Button & Dropdown */
+        /* Top Action Contact Dropdown */
         .contact-dropdown-container {
             position: relative;
             display: inline-block;
@@ -360,34 +360,52 @@
             text-shadow: 0 2px 14px rgba(0, 0, 0, 0.95);
         }
 
+        /* High-Contrast Hero Contact Pills */
         .contact-links {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 12px;
+            margin-top: 4px;
         }
 
         .contact-links a {
-            display: inline-block;
-            color: var(--pill-text);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #ffffff;
             text-decoration: none;
-            background: var(--glass-bg-95);
-            border: 1px solid var(--pill-border);
-            padding: 8px 22px;
+            background: rgba(12, 12, 22, 0.72);
+            border: 1px solid rgba(168, 85, 247, 0.35);
+            padding: 8px 20px;
             border-radius: 50px;
             font-size: 0.88rem;
-            font-weight: 500;
-            -webkit-backdrop-filter: blur(4px);
-            backdrop-filter: blur(4px);
-            transition: all 0.3s ease;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .contact-links a svg {
+            width: 15px;
+            height: 15px;
+            fill: currentColor;
+            flex-shrink: 0;
+            transition: transform 0.2s ease;
         }
 
         .contact-links a:hover {
-            background: var(--glass-hover-50);
-            border-color: rgba(255, 255, 255, 0.35);
+            background: rgba(22, 18, 38, 0.88);
+            border-color: var(--accent-2);
             transform: translateY(-2px);
-            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 6px 22px rgba(168, 85, 247, 0.45), 0 0 12px rgba(99, 102, 241, 0.35);
             color: #ffffff;
+        }
+
+        .contact-links a:hover svg {
+            transform: scale(1.15);
         }
 
         /* Container & Cards */
@@ -885,9 +903,9 @@
 
             <!-- Profile Badge with hover preview -->
             <div class="profile-badge-wrapper">
-                <img src="profile.jpeg" alt="Adarsh G" class="profile-avatar-thumb">
+                <img src="profile.jpeg" alt="Adarsh G" class="profile-avatar-thumb" onerror="this.onerror=null;">
                 <div class="profile-popover">
-                    <img src="profile.jpeg" alt="Adarsh G">
+                    <img src="profile.jpeg" alt="Adarsh G" onerror="this.onerror=null;">
                     <span>Adarsh G</span>
                 </div>
             </div>
@@ -899,11 +917,25 @@
         <div class="hero-text-block">
             <h1><span class="color-wave-text">Adarsh G</span></h1>
             <h2>Software Engineer | Machine Learning & Data Science | Computational Intelligence</h2>
+            
+            <!-- High-Contrast, Sleek Glass Contact Links with Icons -->
             <div class="contact-links">
-                <a href="mailto:adarshgandla.tab@gmail.com?subject=Connecting%20via%20your%20Portfolio&body=Hi%20Adarsh,%0A%0AI%20came%20across%20your%20portfolio%20website%20and%20wanted%20to%20reach%20out%20to%20connect.">Email</a>
-                <a href="https://linkedin.com/in/adarshgandla" target="_blank">LinkedIn</a>
-                <a href="https://github.com/adarsh-gandla" target="_blank">GitHub</a>
-                <a href="http://researchgate.net/profile/adarsh-gandla" target="_blank">ResearchGate</a>
+                <a href="mailto:adarshgandla.tab@gmail.com?subject=Connecting%20via%20your%20Portfolio&body=Hi%20Adarsh,%0A%0AI%20came%20across%20your%20portfolio%20website%20and%20wanted%20to%20reach%20out%20to%20connect.">
+                    <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                    <span>Email</span>
+                </a>
+                <a href="https://linkedin.com/in/adarshgandla" target="_blank" rel="noopener noreferrer">
+                    <svg viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+                    <span>LinkedIn</span>
+                </a>
+                <a href="https://github.com/adarsh-gandla" target="_blank" rel="noopener noreferrer">
+                    <svg viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                    <span>GitHub</span>
+                </a>
+                <a href="http://researchgate.net/profile/adarsh-gandla" target="_blank" rel="noopener noreferrer">
+                    <svg viewBox="0 0 24 24"><path d="M19.5 2h-15C3.1 2 2 3.1 2 4.5v15C2 20.9 3.1 22 4.5 22h15c1.4 0 2.5-1.1 2.5-2.5v-15C22 3.1 20.9 2 19.5 2zm-8.8 14.8c-2.3 0-4.2-1.9-4.2-4.2s1.9-4.2 4.2-4.2c1.1 0 2.2.4 3 1.2l-1.2 1.2c-.5-.5-1.1-.7-1.8-.7-1.4 0-2.6 1.2-2.6 2.6s1.2 2.6 2.6 2.6c1.2 0 2.1-.7 2.4-1.7h-2.4v-1.6h4.1c.1.3.1.6.1.9 0 2.3-1.6 3.9-4.2 3.9z"/></svg>
+                    <span>ResearchGate</span>
+                </a>
             </div>
         </div>
     </header>
@@ -968,7 +1000,7 @@
             <div class="card">
                 <div class="card-entity-header">
                     <a href="https://smart-logistics-v4.vercel.app" target="_blank" rel="noopener noreferrer">
-                        <img src="Logos/smart-logistics-logo.webp" alt="Smart Logistics" class="entity-logo" onerror="this.src='Logos/smart-logistics-logo.png'">
+                        <img src="Logos/smart-logistics-logo.webp" alt="Smart Logistics" class="entity-logo" onerror="this.onerror=null;">
                     </a>
                     <div class="entity-title-wrap">
                         <h4>Smart Logistics: AI Route & Demand Optimization Platform</h4>
@@ -987,7 +1019,7 @@
             <!-- Agriculture ML -->
             <div class="card">
                 <div class="card-entity-header">
-                    <img src="Logos/agri-ml-logo.webp" alt="Machine Learning for Agriculture" class="entity-logo" onerror="this.src='Logos/agri-ml-logo.png'">
+                    <img src="Logos/agri-ml-logo.webp" alt="Machine Learning for Agriculture" class="entity-logo" onerror="this.onerror=null;">
                     <div class="entity-title-wrap">
                         <h4>Machine Learning for Agriculture</h4>
                         <div class="date">Academic Project | 2024</div>
@@ -1002,7 +1034,7 @@
             <!-- Skin Cancer Detection -->
             <div class="card">
                 <div class="card-entity-header">
-                    <img src="Logos/cancer-ml-logo.webp" alt="ML-Based Early Skin Cancer Detection" class="entity-logo" onerror="this.src='Logos/cancer-ml-logo.png'">
+                    <img src="Logos/cancer-ml-logo.webp" alt="ML-Based Early Skin Cancer Detection" class="entity-logo" onerror="this.onerror=null;">
                     <div class="entity-title-wrap">
                         <h4>ML-Based Early Skin Cancer Detection</h4>
                         <div class="date">Faculty Research Support | 2024</div>
@@ -1022,7 +1054,7 @@
             <div class="card">
                 <div class="card-entity-header">
                     <a href="https://dsquareconsulting.com/" target="_blank" rel="noopener noreferrer">
-                        <img src="Logos/dsquare-logo.webp" alt="D Square Consulting Services" class="entity-logo" onerror="this.src='Logos/dsquare-logo.png'">
+                        <img src="Logos/dsquare-logo.webp" alt="D Square Consulting Services" class="entity-logo" onerror="this.onerror=null;">
                     </a>
                     <div class="company-title-wrap">
                         <h4>AI-ML Apprentice</h4>
@@ -1042,12 +1074,12 @@
             <div class="card">
                 <div class="card-entity-header">
                     <a href="https://edunoversetechsolutions.com/" target="_blank" rel="noopener noreferrer">
-                        <img src="Logos/edunoverse-logo.webp" alt="EduNoVerse Tech Solutions" class="entity-logo" onerror="this.src='Logos/edunoverse-logo.png'">
+                        <img src="Logos/edunoverse-logo.webp" alt="EduNoVerse Tech Solutions" class="entity-logo" onerror="this.onerror=null;">
                     </a>
                     <div class="entity-title-wrap">
                         <h4>Data Science Intern</h4>
                         <div class="date">
-                            <a href="https://edunoversetechsolutions.com/" target="_blank" rel="noopener noreferrer" class="entity-link">EduNoVerse Tech Solutions</a>, Remote | Aug 2025 – Oct 2025
+                            <a href="https://edunoversetechsolutions.com/" target="_blank" rel="noopener noreferrer" class="company-link">EduNoVerse Tech Solutions</a>, Remote | Aug 2025 – Oct 2025
                         </div>
                     </div>
                 </div>
@@ -1060,12 +1092,12 @@
             <div class="card">
                 <div class="card-entity-header">
                     <a href="https://www.vaultofcodes.in/" target="_blank" rel="noopener noreferrer">
-                        <img src="Logos/vaultofcodes-logo.webp" alt="VaultofCodes.in" class="entity-logo" onerror="this.src='Logos/vaultofcodes-logo.png'">
+                        <img src="Logos/vaultofcodes-logo.webp" alt="VaultofCodes.in" class="entity-logo" onerror="this.onerror=null;">
                     </a>
                     <div class="entity-title-wrap">
                         <h4>Java Programming Intern</h4>
                         <div class="date">
-                            <a href="https://www.vaultofcodes.in/" target="_blank" rel="noopener noreferrer" class="entity-link">VaultofCodes.in</a>, Remote | Jan 2024 – Feb 2024
+                            <a href="https://www.vaultofcodes.in/" target="_blank" rel="noopener noreferrer" class="company-link">VaultofCodes.in</a>, Remote | Jan 2024 – Feb 2024
                         </div>
                     </div>
                 </div>
@@ -1079,12 +1111,12 @@
             <div class="card">
                 <div class="card-entity-header">
                     <a href="https://pantechelearning.com/" target="_blank" rel="noopener noreferrer">
-                        <img src="Logos/pantech-logo.webp" alt="Pantech e Learning" class="entity-logo" onerror="this.src='Logos/pantech-logo.png'">
+                        <img src="Logos/pantech-logo.webp" alt="Pantech e Learning" class="entity-logo" onerror="this.onerror=null;">
                     </a>
                     <div class="entity-title-wrap">
                         <h4>Data Science Intern</h4>
                         <div class="date">
-                            <a href="https://pantechelearning.com/" target="_blank" rel="noopener noreferrer" class="entity-link">Pantech e Learning Pvt. Ltd.</a>, Remote | Dec 2023 – Jan 2024
+                            <a href="https://pantechelearning.com/" target="_blank" rel="noopener noreferrer" class="company-link">Pantech e Learning Pvt. Ltd.</a>, Remote | Dec 2023 – Jan 2024
                         </div>
                     </div>
                 </div>
@@ -1102,7 +1134,7 @@
             <div class="card">
                 <div class="card-entity-header">
                     <a href="https://sistk.org/" target="_blank" rel="noopener noreferrer">
-                        <img src="Logos/sistk-logo.webp" alt="Siddartha Institute of Science and Technology" class="entity-logo" onerror="this.src='Logos/sistk-logo.png'">
+                        <img src="Logos/sistk-logo.webp" alt="Siddartha Institute of Science and Technology" class="entity-logo" onerror="this.onerror=null;">
                     </a>
                     <div class="entity-title-wrap">
                         <h4>B.Tech in Computer Science and Engineering</h4>
