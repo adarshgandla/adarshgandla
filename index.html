@@ -12,18 +12,18 @@
             --text-muted: #94a3b8;
             --accent-1: #6366f1;
             --accent-2: #a855f7;
-            
+
             /* 95% Transparent Glass */
             --glass-bg-95: rgba(255, 255, 255, 0.05);
             --glass-border: rgba(255, 255, 255, 0.12);
-            
+
             /* 50% Frosted Hover State */
             --glass-hover-50: rgba(12, 12, 22, 0.52);
-            
+
             --pill-bg: rgba(255, 255, 255, 0.05);
             --pill-border: rgba(255, 255, 255, 0.15);
             --pill-text: #cbd5e1;
-            
+
             --accent-gradient: linear-gradient(135deg, var(--accent-1), var(--accent-2));
         }
 
@@ -59,7 +59,7 @@
             pointer-events: none;
         }
 
-        /* Ambient Neutral Vignette */
+        /* Minimal Ambient Vignette */
         .canvas-overlay {
             position: fixed;
             top: 0;
@@ -71,11 +71,11 @@
             pointer-events: none;
         }
 
-        /* Top Bar Layout */
+        /* Top Bar Layout: Mathematically Centered Links */
         nav {
             display: flex;
-            justify-content: space-between;
-            align-items: flex-start; /* Clean top alignment */
+            justify-content: flex-end;
+            align-items: center;
             padding: 18px 4%;
             position: sticky;
             top: 0;
@@ -86,16 +86,21 @@
         }
 
         .nav-center {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
             display: flex;
             align-items: center;
             gap: 10px;
-            margin: 0 auto;
+            pointer-events: auto;
         }
 
         .nav-right {
             display: flex;
             align-items: center;
             gap: 12px;
+            z-index: 102;
         }
 
         /* 90-95% Transparent Glass Capsule Nav Buttons */
@@ -268,46 +273,51 @@
             box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
         }
 
-        /* Hero / Header Section: Anchored over the white shirt */
+        /* Hero / Header Section */
         header {
-            min-height: 72vh;
+            min-height: 82vh;
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
             align-items: center;
             text-align: center;
-            padding: 0 5% 55px;
+            padding: 0 5% 40px;
             position: relative;
             z-index: 10;
         }
 
-        /* Frosted Glass Typographic Effect on Name */
         header h1 {
-            font-size: clamp(2.4rem, 4.8vw, 4rem);
+            font-size: clamp(2.6rem, 5vw, 4.3rem);
             font-weight: 800;
             line-height: 1.1;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
 
-        .glass-title {
-            color: #ffffff;
-            background: linear-gradient(180deg, #ffffff 30%, rgba(255, 255, 255, 0.65) 100%);
+        .color-wave-text {
+            background: linear-gradient(135deg, #818cf8 0%, #c084fc 35%, #ff7eb3 70%, #818cf8 100%);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 35px rgba(168, 85, 247, 0.4), 0 4px 18px rgba(0, 0, 0, 0.85);
-            filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.7));
+            background-size: 300% 300%;
+            animation: textGradientWave 6s ease-in-out infinite alternate;
+            filter: drop-shadow(0 3px 12px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 20px rgba(168, 85, 247, 0.35));
             letter-spacing: -0.5px;
         }
 
+        @keyframes textGradientWave {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
         header h2 {
-            color: #cbd5e1;
+            color: #e2e8f0;
             font-size: clamp(0.92rem, 1.6vw, 1.15rem);
-            font-weight: 400;
+            font-weight: 500;
             max-width: 750px;
             margin-bottom: 1.6rem;
             line-height: 1.5;
-            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9);
+            text-shadow: 0 2px 14px rgba(0, 0, 0, 0.95);
         }
 
         .contact-links {
@@ -340,12 +350,12 @@
             color: #ffffff;
         }
 
-        /* Container & Cards: 95% Transparent, 50% Frost on Hover */
+        /* Container & Cards */
         .container {
             width: 100%;
             max-width: min(1100px, 90vw);
             margin: 0 auto;
-            padding: 20px 20px clamp(40px, 6vh, 80px);
+            padding: 30px 20px clamp(40px, 6vh, 80px);
             position: relative;
             z-index: 10;
         }
@@ -437,7 +447,7 @@
             right: 0;
             bottom: 0;
             background: radial-gradient(
-                750px circle at var(--mouse-x, -999px) var(--mouse-y, -999px), 
+                750px circle at var(--mouse-x, -999px) var(--mouse-y, -999px),
                 rgba(168, 85, 247, 0.18),
                 rgba(99, 102, 241, 0.08) 25%,
                 transparent 50%
@@ -457,20 +467,57 @@
             z-index: 2;
         }
 
-        .card h4 {
+        /* Unified Card Header with Entity Logo */
+        .card-entity-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 12px;
+        }
+
+        .entity-logo {
+            width: 52px;
+            height: 52px;
+            border-radius: 12px;
+            background: #ffffff;
+            padding: 6px;
+            object-fit: contain;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+            flex-shrink: 0;
+            transition: transform 0.25s ease;
+        }
+
+        .card:hover .entity-logo {
+            transform: scale(1.06);
+        }
+
+        .entity-title-wrap h4 {
             font-size: 1.35rem;
             font-weight: 600;
             color: #ffffff;
-            margin-bottom: 6px;
+            margin-bottom: 3px;
         }
 
-        .card .date {
+        .entity-title-wrap .date {
             color: #c084fc;
             font-size: 0.88rem;
             font-style: normal;
             font-weight: 500;
-            margin-bottom: 14px;
+            margin-bottom: 0;
             display: inline-block;
+        }
+
+        .entity-link {
+            color: #c084fc;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease, text-decoration 0.2s ease;
+        }
+
+        .entity-link:hover {
+            color: #ffffff;
+            text-decoration: underline;
         }
 
         .card ul {
@@ -484,13 +531,37 @@
             line-height: 1.65;
         }
 
-        .card li strong, .card p strong {
+        .card li strong,
+        .card p strong {
             color: #ffffff;
         }
 
         .card p {
             color: #cbd5e1;
             margin-bottom: 8px;
+        }
+
+        /* Certificate Badge Links */
+        .cert-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.8rem;
+            color: #c084fc;
+            text-decoration: none;
+            background: rgba(168, 85, 247, 0.12);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            padding: 3px 12px;
+            border-radius: 20px;
+            margin-left: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .cert-link:hover {
+            background: rgba(168, 85, 247, 0.3);
+            border-color: var(--accent-2);
+            color: #ffffff;
+            transform: translateY(-1px);
         }
 
         .skills-group {
@@ -556,7 +627,7 @@
             color: white;
         }
 
-        /* Final Art Showcase Buffer: 95% Transparent, 50% on Hover */
+        /* Final Art Showcase Buffer */
         .hero-art-showcase {
             min-height: 75vh;
             display: flex;
@@ -644,43 +715,72 @@
             transform: translateY(-2px);
         }
 
-        /* Minimal Transparent Footer */
+        /* Minimal Seamless Cyberpunk Footer */
         footer {
             text-align: center;
-            padding: 16px 20px 24px;
+            padding: 24px 20px 36px;
             background: transparent;
-            color: rgba(255, 255, 255, 0.4);
-            border-top: none;
-            font-size: 0.82rem;
-            letter-spacing: 0.4px;
             position: relative;
             z-index: 10;
         }
 
+        footer p {
+            display: inline-block;
+            font-size: 0.88rem;
+            font-weight: 500;
+            letter-spacing: 0.6px;
+            color: #ffffff;
+            text-shadow:
+                -1px -1px 0 #000,
+                 1px -1px 0 #000,
+                -1px  1px 0 #000,
+                 1px  1px 0 #000,
+                 0 0 10px rgba(168, 85, 247, 0.7),
+                 0 0 20px rgba(99, 102, 241, 0.4);
+            opacity: 0.9;
+            transition: opacity 0.3s ease, text-shadow 0.3s ease;
+        }
+
+        footer p:hover {
+            opacity: 1;
+            text-shadow:
+                -1px -1px 0 #000,
+                 1px -1px 0 #000,
+                -1px  1px 0 #000,
+                 1px  1px 0 #000,
+                 0 0 14px rgba(168, 85, 247, 0.95),
+                 0 0 28px rgba(99, 102, 241, 0.65);
+        }
+
         @media (max-width: 900px) {
             nav {
-                flex-wrap: wrap;
-                gap: 10px;
-                padding: 12px 4%;
+                justify-content: space-between;
+                padding: 14px 4%;
             }
+
             .nav-center {
+                position: static;
+                transform: none;
                 order: 2;
                 width: 100%;
                 justify-content: center;
                 flex-wrap: wrap;
                 gap: 6px;
-                margin-top: 6px;
+                margin-top: 8px;
             }
+
             .nav-right {
                 order: 1;
                 margin-left: auto;
             }
+
             .nav-capsule {
                 padding: 5px 12px;
                 font-size: 0.8rem;
             }
+
             header {
-                min-height: 50vh;
+                min-height: 60vh;
                 padding-bottom: 30px;
             }
         }
@@ -731,9 +831,9 @@
         </div>
     </nav>
 
-    <!-- Header Section (Anchored on white t-shirt) -->
+    <!-- Header Section -->
     <header>
-        <h1><span class="glass-title">Adarsh G</span></h1>
+        <h1><span class="color-wave-text">Adarsh G</span></h1>
         <h2>Software Engineer | Machine Learning & Data Science | Computational Intelligence</h2>
         <div class="contact-links">
             <a href="mailto:adarshgandla.tab@gmail.com?subject=Connecting%20via%20your%20Portfolio&body=Hi%20Adarsh,%0A%0AI%20came%20across%20your%20portfolio%20website%20and%20wanted%20to%20reach%20out%20to%20connect.">Email</a>
@@ -798,12 +898,20 @@
 
         <section id="projects" class="fade-in">
             <h3>Projects & Publications</h3>
-            
+
+            <!-- Smart Logistics -->
             <div class="card">
-                <h4>Smart Logistics: AI Route & Demand Optimization Platform</h4>
-                <div class="date">Academic Project & Live Deployment | Nov 2025 – Apr 2026</div>
+                <div class="card-entity-header">
+                    <a href="https://smart-logistics-v4.vercel.app" target="_blank" rel="noopener noreferrer">
+                        <img src="Logos/smart-logistics-logo.png" alt="Smart Logistics" class="entity-logo" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2830/2830305.png'">
+                    </a>
+                    <div class="entity-title-wrap">
+                        <h4>Smart Logistics: AI Route & Demand Optimization Platform</h4>
+                        <div class="date">Academic Project & Live Deployment | Nov 2025 – Apr 2026</div>
+                    </div>
+                </div>
                 <ul>
-                    <li><strong>Publication:</strong> <a href="https://ijersem.com/72319-2/" target="_blank" style="color: #c084fc; text-decoration: none; font-weight: bold;"><em>Deep Learning-Based Route Optimization and Demand Forecasting for Smart Logistics</em></a> published in the International Journal of Emerging Research in Science, Engineering, and Management (IJERSEM).</li>
+                    <li><strong>Publication:</strong> <a href="https://ijersem.com/72319-2/" target="_blank" class="entity-link"><em>Deep Learning-Based Route Optimization and Demand Forecasting for Smart Logistics</em></a> published in the International Journal of Emerging Research in Science, Engineering, and Management (IJERSEM).</li>
                     <li>Architected a cloud-native, software-only logistics optimization system to solve complex routing and demand prediction challenges for delivery networks.</li>
                     <li>Implemented a route optimization engine in Python using Google OR-Tools to model and solve TSP/VRP style routing scenarios for cost, distance minimization, and eco-efficiency.</li>
                     <li>Built and trained an LSTM-based demand forecasting model in TensorFlow to predict product demand across locations and time periods.</li>
@@ -811,18 +919,30 @@
                 <a href="https://smart-logistics-v4.vercel.app" target="_blank" class="btn">View Live App</a>
             </div>
 
+            <!-- Agriculture ML -->
             <div class="card">
-                <h4>Machine Learning for Agriculture</h4>
-                <div class="date">Academic Project | 2024</div>
+                <div class="card-entity-header">
+                    <img src="Logos/agri-ml-logo.png" alt="Machine Learning for Agriculture" class="entity-logo" onerror="this.src='https://cdn-icons-png.flaticon.com/512/606/606203.png'">
+                    <div class="entity-title-wrap">
+                        <h4>Machine Learning for Agriculture</h4>
+                        <div class="date">Academic Project | 2024</div>
+                    </div>
+                </div>
                 <ul>
                     <li>Built a crop yield prediction model in Python using Random Forest Regression on historical agricultural and environmental data.</li>
                     <li>Performed data cleaning, feature selection, and model evaluation to estimate yield based on soil, climate, and crop features, improving decision support for farmers.</li>
                 </ul>
             </div>
 
+            <!-- Skin Cancer Detection -->
             <div class="card">
-                <h4>ML-Based Early Skin Cancer Detection</h4>
-                <div class="date">Faculty Research Support | 2024</div>
+                <div class="card-entity-header">
+                    <img src="Logos/cancer-ml-logo.png" alt="ML-Based Early Skin Cancer Detection" class="entity-logo" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2966/2966327.png'">
+                    <div class="entity-title-wrap">
+                        <h4>ML-Based Early Skin Cancer Detection</h4>
+                        <div class="date">Faculty Research Support | 2024</div>
+                    </div>
+                </div>
                 <ul>
                     <li>Provided data processing and programming assistance for a faculty-led research paper on machine learning based early skin cancer detection.</li>
                     <li>Prepared datasets, implemented preprocessing pipelines, and supported experimentation of classification models for lesion image analysis.</li>
@@ -833,26 +953,76 @@
         <section id="experience" class="fade-in">
             <h3>Internships & Experience</h3>
 
+            <!-- D Square Consulting Services -->
             <div class="card">
-                <h4>Data Science Intern</h4>
-                <div class="date">EduNoVerse Tech Solutions, Remote | Aug 2025 – Oct 2025</div>
+                <div class="card-entity-header">
+                    <a href="https://dsquareconsulting.com/" target="_blank" rel="noopener noreferrer">
+                        <img src="Logos/dsquare-logo.png" alt="D Square Consulting Services" class="entity-logo">
+                    </a>
+                    <div class="company-title-wrap">
+                        <h4>AI-ML Apprentice</h4>
+                        <div class="date">
+                            <a href="https://dsquareconsulting.com/" target="_blank" rel="noopener noreferrer" class="entity-link">D Square Consulting Services</a> | May 2026 – Present
+                        </div>
+                    </div>
+                </div>
+                <ul>
+                    <li>Engineering and fine-tuning machine learning and deep learning models with a focus on scalable Python application development.</li>
+                    <li>Implementing algorithmic optimizations and mathematical routing frameworks utilizing Google OR-Tools.</li>
+                    <li>Collaborating across cross-functional teams to integrate intelligent data pipelines and predictive modeling workflows.</li>
+                </ul>
+            </div>
+
+            <!-- EduNoVerse -->
+            <div class="card">
+                <div class="card-entity-header">
+                    <a href="https://edunoversetechsolutions.com/" target="_blank" rel="noopener noreferrer">
+                        <img src="Logos/edunoverse-logo.png" alt="EduNoVerse Tech Solutions" class="entity-logo" onerror="this.src='https://cdn-icons-png.flaticon.com/512/1006/1006771.png'">
+                    </a>
+                    <div class="entity-title-wrap">
+                        <h4>Data Science Intern</h4>
+                        <div class="date">
+                            <a href="https://edunoversetechsolutions.com/" target="_blank" rel="noopener noreferrer" class="entity-link">EduNoVerse Tech Solutions</a>, Remote | Aug 2025 – Oct 2025
+                        </div>
+                    </div>
+                </div>
                 <ul>
                     <li>Completed a 120-hour structured internship gaining comprehensive, hands-on exposure to advanced data science methodologies, predictive analytics, and real-world machine learning applications.</li>
                 </ul>
             </div>
 
+            <!-- VaultofCodes -->
             <div class="card">
-                <h4>Java Programming Intern</h4>
-                <div class="date">VaultofCodes.in, Remote | Jan 2024 – Feb 2024</div>
+                <div class="card-entity-header">
+                    <a href="https://www.vaultofcodes.in/" target="_blank" rel="noopener noreferrer">
+                        <img src="Logos/vaultofcodes-logo.png" alt="VaultofCodes.in" class="entity-logo" onerror="this.src='https://cdn-icons-png.flaticon.com/512/226/226777.png'">
+                    </a>
+                    <div class="entity-title-wrap">
+                        <h4>Java Programming Intern</h4>
+                        <div class="date">
+                            <a href="https://www.vaultofcodes.in/" target="_blank" rel="noopener noreferrer" class="entity-link">VaultofCodes.in</a>, Remote | Jan 2024 – Feb 2024
+                        </div>
+                    </div>
+                </div>
                 <ul>
                     <li>Developed and debugged Java application modules using object-oriented programming concepts such as classes, inheritance, and interfaces.</li>
                     <li>Practiced real-world coding standards, version control, and code reviews to improve code quality and reliability.</li>
                 </ul>
             </div>
 
+            <!-- Pantech -->
             <div class="card">
-                <h4>Data Science Intern</h4>
-                <div class="date">Pantech e Learning Pvt. Ltd., Remote | Dec 2023 – Jan 2024</div>
+                <div class="card-entity-header">
+                    <a href="https://pantechelearning.com/" target="_blank" rel="noopener noreferrer">
+                        <img src="Logos/pantech-logo.png" alt="Pantech e Learning" class="entity-logo" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3067/3067451.png'">
+                    </a>
+                    <div class="entity-title-wrap">
+                        <h4>Data Science Intern</h4>
+                        <div class="date">
+                            <a href="https://pantechelearning.com/" target="_blank" rel="noopener noreferrer" class="entity-link">Pantech e Learning Pvt. Ltd.</a>, Remote | Dec 2023 – Jan 2024
+                        </div>
+                    </div>
+                </div>
                 <ul>
                     <li>Completed a structured data science internship covering the end-to-end data science lifecycle from data collection to model evaluation.</li>
                     <li>Used Python, Pandas, NumPy, and Scikit-learn to build a proof-of-concept classification model, including data preprocessing, feature engineering, and metrics-based evaluation.</li>
@@ -862,20 +1032,45 @@
 
         <section id="education" class="fade-in">
             <h3>Education & Certifications</h3>
+
+            <!-- Siddhartha Institute -->
             <div class="card">
-                <h4>B.Tech in Computer Science and Engineering</h4>
-                <div class="date">Siddartha Institute of Science and Technology | 2022 – May 2026</div>
+                <div class="card-entity-header">
+                    <a href="https://sistk.org/" target="_blank" rel="noopener noreferrer">
+                        <img src="Logos/siddartha-logo.png" alt="Siddartha Institute of Science and Technology" class="entity-logo" onerror="this.src='https://cdn-icons-png.flaticon.com/512/807/807480.png'">
+                    </a>
+                    <div class="entity-title-wrap">
+                        <h4>B.Tech in Computer Science and Engineering</h4>
+                        <div class="date">
+                            <a href="https://sistk.org/" target="_blank" rel="noopener noreferrer" class="entity-link">Siddartha Institute of Science and Technology</a> | 2022 – May 2026
+                        </div>
+                    </div>
+                </div>
                 <p><strong>CGPA:</strong> 9.33 / 10.0</p>
-                <p><strong>Honors:</strong> 1st Place Certificate of Merit (1st Year, 2nd Semester Examinations).</p>
+                <p><strong>Honors:</strong> 1st Place Certificate of Merit (1st Year, 2nd Semester Examinations).
+                    <a href="Certificates/merit-certificate-1st-place.pdf" target="_blank" class="cert-link">📜 View Certificate</a>
+                </p>
             </div>
-            
+
             <div class="card">
                 <h4>Certifications & Extracurriculars</h4>
                 <ul>
-                    <li><strong>Industry Integrated Data Science Workshop:</strong> Exafluence Inc & Sri Venkateswara University (Oct 2025).</li>
-                    <li><strong>NPTEL Elite Certification:</strong> The Joy of Computing Using Python & Problem Solving Through Programming in C.</li>
-                    <li><strong>Hackathon Participant:</strong> 24-Hour Siddharth #Hackfest2K25, Microsoft Learn Student Chapter.</li>
-                    <li><strong>Leadership & Coordination:</strong> Coordinated "Artistic Graphs" for Star Techies 2K25 and Spot Events for Siddharth Quest 2K24.</li>
+                    <li>
+                        <strong>Industry Integrated Data Science Workshop:</strong> Exafluence Inc & Sri Venkateswara University (Oct 2025).
+                        <a href="Certificates/exfluence-workshop.pdf" target="_blank" class="cert-link">📜 View Certificate</a>
+                    </li>
+                    <li>
+                        <strong>NPTEL Elite Certification:</strong> The Joy of Computing Using Python & Problem Solving Through Programming in C.
+                        <a href="Certificates/nptel-python-elite.pdf" target="_blank" class="cert-link">📜 Python</a>
+                        <a href="Certificates/nptel-c-elite.pdf" target="_blank" class="cert-link">📜 C</a>
+                    </li>
+                    <li>
+                        <strong>Hackathon Participant:</strong> 24-Hour Siddharth #Hackfest2K25, Microsoft Learn Student Chapter.
+                        <a href="Certificates/hackfest2k25.pdf" target="_blank" class="cert-link">📜 View Certificate</a>
+                    </li>
+                    <li>
+                        <strong>Leadership & Coordination:</strong> Coordinated "Artistic Graphs" for Star Techies 2K25 and Spot Events for Siddharth Quest 2K24.
+                    </li>
                 </ul>
             </div>
         </section>
@@ -893,7 +1088,7 @@
         </div>
     </div>
 
-    <!-- Minimal Seamless Footer -->
+    <!-- Minimal Seamless Cyberpunk Footer -->
     <footer>
         <p>&copy; 2026 Adarsh G. All Rights Reserved.</p>
     </footer>
