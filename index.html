@@ -17,12 +17,12 @@
             --glass-bg-95: rgba(255, 255, 255, 0.05);
             --glass-border: rgba(255, 255, 255, 0.12);
 
-            /* 50% Frosted Hover State */
-            --glass-hover-50: rgba(12, 12, 22, 0.52);
+            /* Frosted Hover State */
+            --glass-hover-50: rgba(14, 14, 26, 0.72);
 
-            --pill-bg: rgba(255, 255, 255, 0.05);
-            --pill-border: rgba(255, 255, 255, 0.15);
-            --pill-text: #cbd5e1;
+            --pill-bg: rgba(255, 255, 255, 0.04);
+            --pill-border: rgba(192, 132, 252, 0.22);
+            --pill-text: #e2e8f0;
 
             --accent-gradient: linear-gradient(135deg, var(--accent-1), var(--accent-2));
         }
@@ -59,7 +59,7 @@
             pointer-events: none;
         }
 
-        /* Minimal Ambient Vignette */
+        /* Ambient Vignette */
         .canvas-overlay {
             position: fixed;
             top: 0;
@@ -67,7 +67,7 @@
             width: 100vw;
             height: 100vh;
             z-index: -1;
-            background: radial-gradient(circle at center, rgba(5, 5, 8, 0.02) 0%, rgba(5, 5, 8, 0.45) 100%);
+            background: radial-gradient(circle at center, rgba(5, 5, 8, 0.02) 0%, rgba(5, 5, 8, 0.5) 100%);
             pointer-events: none;
         }
 
@@ -92,7 +92,7 @@
             transform: translate(-50%, -50%);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             pointer-events: auto;
         }
 
@@ -103,29 +103,47 @@
             z-index: 102;
         }
 
-        /* Transparent Glass Capsule Nav Buttons */
+        /* Text-Only Nav Buttons with Color-Flow & Hover Glass */
         .nav-capsule {
-            color: var(--pill-text);
+            display: inline-block;
             text-decoration: none;
-            font-size: 0.86rem;
-            font-weight: 500;
+            font-size: 0.9rem;
+            font-weight: 600;
             letter-spacing: 0.4px;
-            padding: 7px 18px;
+            padding: 6px 16px;
             border-radius: 50px;
-            background: var(--glass-bg-95);
-            border: 1px solid var(--pill-border);
-            -webkit-backdrop-filter: blur(4px);
-            backdrop-filter: blur(4px);
+            background: transparent;
+            border: 1px solid transparent;
+            background-image: linear-gradient(
+                90deg, 
+                #ffffff 0%, 
+                #c084fc 25%, 
+                #818cf8 50%, 
+                #38bdf8 75%, 
+                #ffffff 100%
+            );
+            background-size: 250% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: subtleColorShift 7s linear infinite;
             transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
             white-space: nowrap;
         }
 
         .nav-capsule:hover {
-            background: var(--glass-hover-50);
-            border-color: rgba(255, 255, 255, 0.35);
-            color: #ffffff;
+            background-color: var(--glass-hover-50);
+            border-color: rgba(192, 132, 252, 0.4);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
             transform: translateY(-2px);
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5), 0 0 12px rgba(168, 85, 247, 0.3);
+            -webkit-text-fill-color: #ffffff;
+        }
+
+        @keyframes subtleColorShift {
+            0% { background-position: 0% center; }
+            100% { background-position: 250% center; }
         }
 
         /* Profile Avatar */
@@ -193,7 +211,7 @@
             font-weight: 500;
         }
 
-        /* Top Action Contact Dropdown */
+        /* --- CONTACT TRIGGER & DROPDOWN (GLASS & SUBTLE FLOW) --- */
         .contact-dropdown-container {
             position: relative;
             display: inline-block;
@@ -201,20 +219,27 @@
 
         .contact-btn-trigger {
             cursor: pointer;
-            background: var(--glass-bg-95);
-            border: 1px solid var(--pill-border);
-            color: #f1f5f9;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(192, 132, 252, 0.25);
+            color: #ffffff;
             font-weight: 600;
+            font-size: 0.86rem;
             display: flex;
             align-items: center;
             gap: 6px;
             padding: 7px 18px;
+            border-radius: 50px;
+            -webkit-backdrop-filter: blur(8px);
+            backdrop-filter: blur(8px);
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
         }
 
         .contact-btn-trigger:hover {
             background: var(--glass-hover-50);
-            border-color: rgba(255, 255, 255, 0.35);
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
+            border-color: rgba(192, 132, 252, 0.6);
+            box-shadow: 0 4px 20px rgba(168, 85, 247, 0.35);
+            transform: translateY(-2px);
         }
 
         .dropdown-menu {
@@ -334,7 +359,7 @@
             letter-spacing: -0.5px;
         }
 
-        /* --- VIBRANT NEON GLASS TEXT (NO DULL GRAY) --- */
+        /* Vibrant Neon Glass Text */
         .glass-name-text {
             display: inline-block;
             background: linear-gradient(
@@ -368,7 +393,7 @@
             }
         }
 
-        /* LinkedIn Matching Subtitle & Tagline */
+        /* Subtitle & Tagline */
         header h2 {
             color: #f8fafc;
             font-size: clamp(0.95rem, 1.8vw, 1.22rem);
@@ -389,12 +414,12 @@
             text-shadow: 0 0 12px rgba(192, 132, 252, 0.5), 0 2px 10px rgba(0, 0, 0, 0.9);
         }
 
-        /* Hero Contact Pills */
+        /* --- SUBTLE, TEMPTING GLASS CONTACT PILLS (NOT TOO LOUD, EASY TO READ ON HOVER) --- */
         .contact-links {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 10px;
+            gap: 12px;
             margin-top: 2px;
         }
 
@@ -402,42 +427,59 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            color: var(--pill-text);
             text-decoration: none;
             font-size: 0.86rem;
-            font-weight: 500;
+            font-weight: 600;
             letter-spacing: 0.4px;
-            padding: 7px 18px;
+            padding: 8px 20px;
             border-radius: 50px;
-            background: var(--glass-bg-95);
-            border: 1px solid var(--pill-border);
-            -webkit-backdrop-filter: blur(6px);
-            backdrop-filter: blur(6px);
-            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+            background: rgba(18, 18, 30, 0.55);
+            border: 1px solid rgba(192, 132, 252, 0.22);
+            -webkit-backdrop-filter: blur(8px);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08);
             transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
             white-space: nowrap;
+        }
+
+        .contact-links a span {
+            background-image: linear-gradient(
+                90deg, 
+                #ffffff 0%, 
+                #c084fc 35%, 
+                #818cf8 70%, 
+                #ffffff 100%
+            );
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: subtleColorShift 6s linear infinite;
         }
 
         .contact-links a svg {
             width: 14px;
             height: 14px;
-            fill: currentColor;
+            fill: #c084fc;
             opacity: 0.9;
             flex-shrink: 0;
-            transition: transform 0.2s ease;
+            transition: transform 0.25s ease, fill 0.25s ease;
         }
 
         .contact-links a:hover {
             background: var(--glass-hover-50);
-            border-color: rgba(255, 255, 255, 0.35);
-            color: #ffffff;
+            border-color: rgba(192, 132, 252, 0.6);
             transform: translateY(-2px);
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
+            box-shadow: 0 6px 22px rgba(168, 85, 247, 0.4), 0 0 12px rgba(129, 140, 248, 0.25);
+        }
+
+        .contact-links a:hover span {
+            -webkit-text-fill-color: #ffffff;
         }
 
         .contact-links a:hover svg {
+            fill: #ffffff;
             transform: scale(1.15);
-            opacity: 1;
         }
 
         /* Container & Cards */
@@ -564,28 +606,27 @@
             margin-bottom: 12px;
         }
 
-        /* Seamless Dark Logo Badges */
+        /* Pure Image Logo with smooth pop */
         .entity-logo {
-            width: 56px;
-            height: 56px;
-            border-radius: 14px;
-            background: rgba(8, 8, 16, 0.65);
-            padding: 0;
-            object-fit: cover;
-            border: 1px solid rgba(255, 255, 255, 0.16);
-            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.55);
+            width: 52px;
+            height: 52px;
+            background: transparent !important;
+            border: none !important;
+            padding: 0 !important;
+            margin: 0;
+            border-radius: 8px;
+            object-fit: contain;
+            box-shadow: none !important;
             flex-shrink: 0;
-            overflow: hidden;
             display: block;
-            -webkit-backdrop-filter: blur(4px);
-            backdrop-filter: blur(4px);
-            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.3s ease;
         }
 
+        .entity-logo:hover,
         .card:hover .entity-logo {
-            transform: scale(1.08);
-            border-color: rgba(192, 132, 252, 0.5);
-            box-shadow: 0 8px 24px rgba(168, 85, 247, 0.35);
+            transform: scale(1.22);
+            filter: drop-shadow(0 4px 12px rgba(192, 132, 252, 0.7)) drop-shadow(0 0 6px rgba(255, 255, 255, 0.4));
         }
 
         .entity-title-wrap h4 {
@@ -604,7 +645,7 @@
             display: inline-block;
         }
 
-        /* --- DYNAMIC COLOR-CHANGING NEON LINKS (MATCHED TO PAGE THEME) --- */
+        /* Color-Flow Text Links */
         .entity-link {
             display: inline;
             background: linear-gradient(
@@ -621,13 +662,8 @@
             -webkit-text-fill-color: transparent;
             text-decoration: none;
             font-weight: 600;
-            animation: neonLinkFlow 5s linear infinite;
+            animation: subtleColorShift 5s linear infinite;
             transition: filter 0.25s ease;
-        }
-
-        @keyframes neonLinkFlow {
-            0% { background-position: 0% center; }
-            100% { background-position: 250% center; }
         }
 
         .entity-link:hover {
@@ -657,7 +693,63 @@
             margin-bottom: 8px;
         }
 
-        /* Dynamic Color-Changing Certificate Badges */
+        /* Button Cluster for Cards */
+        .card-btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        /* --- REFINED LIGHT GLASS ACTION BUTTONS ("VIEW LIVE APP" & "VIEW PAPER") --- */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0.65rem 1.6rem;
+            border-radius: 50px;
+            background: rgba(18, 18, 30, 0.55);
+            border: 1px solid rgba(192, 132, 252, 0.35);
+            font-weight: 600;
+            font-size: 0.88rem;
+            letter-spacing: 0.3px;
+            text-decoration: none;
+            cursor: pointer;
+            -webkit-backdrop-filter: blur(8px);
+            backdrop-filter: blur(8px);
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            white-space: nowrap;
+        }
+
+        .btn span {
+            background-image: linear-gradient(
+                90deg, 
+                #ffffff 0%, 
+                #c084fc 35%, 
+                #818cf8 70%, 
+                #ffffff 100%
+            );
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: subtleColorShift 6s linear infinite;
+        }
+
+        .btn:hover {
+            background: var(--glass-hover-50);
+            border-color: #c084fc;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(168, 85, 247, 0.45), 0 0 14px rgba(99, 102, 241, 0.35);
+        }
+
+        .btn:hover span {
+            -webkit-text-fill-color: #ffffff;
+        }
+
+        /* Certificate Badges */
         .cert-link {
             display: inline-flex;
             align-items: center;
@@ -686,7 +778,7 @@
             background-clip: text;
             -webkit-text-fill-color: transparent;
             font-weight: 600;
-            animation: neonLinkFlow 5s linear infinite;
+            animation: subtleColorShift 5s linear infinite;
         }
 
         .cert-link:hover {
@@ -737,28 +829,6 @@
             box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
         }
 
-        .btn {
-            display: inline-block;
-            padding: 0.8rem 1.6rem;
-            border-radius: 50px;
-            border: none;
-            background: var(--accent-gradient);
-            color: white;
-            font-weight: 600;
-            font-size: 0.9rem;
-            text-decoration: none;
-            cursor: pointer;
-            margin-top: 14px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 6px 15px rgba(99, 102, 241, 0.35);
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 24px rgba(168, 85, 247, 0.5);
-            color: white;
-        }
-
         /* Final Art Showcase Buffer */
         .hero-art-showcase {
             min-height: 75vh;
@@ -776,7 +846,7 @@
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 20px;
             padding: 22px 30px;
-            max-width: 440px;
+            max-width: 460px;
             width: 88%;
             text-align: center;
             box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
@@ -811,40 +881,93 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 10px;
+            gap: 12px;
         }
 
         .present-btn {
-            display: inline-block;
-            padding: 8px 20px;
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 22px;
             border-radius: 50px;
-            font-size: 0.84rem;
+            font-size: 0.86rem;
             font-weight: 600;
             text-decoration: none;
             transition: all 0.25s ease;
         }
 
         .present-btn-primary {
-            background: var(--accent-gradient);
-            color: #ffffff;
-            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.35);
+            background: rgba(18, 18, 30, 0.6);
+            border: 1px solid rgba(192, 132, 252, 0.35);
+            -webkit-backdrop-filter: blur(8px);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .present-btn-primary span {
+            background-image: linear-gradient(
+                90deg, 
+                #ffffff 0%, 
+                #c084fc 35%, 
+                #818cf8 70%, 
+                #ffffff 100%
+            );
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: subtleColorShift 6s linear infinite;
         }
 
         .present-btn-primary:hover {
+            background: var(--glass-hover-50);
+            border-color: #c084fc;
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(168, 85, 247, 0.55);
+            box-shadow: 0 6px 20px rgba(168, 85, 247, 0.5);
+        }
+
+        .present-btn-primary:hover span {
+            -webkit-text-fill-color: #ffffff;
         }
 
         .present-btn-secondary {
             background: var(--glass-bg-95);
             border: 1px solid var(--pill-border);
-            color: #ffffff;
+            color: #e2e8f0;
         }
 
         .present-btn-secondary:hover {
             background: var(--glass-hover-50);
             border-color: rgba(255, 255, 255, 0.35);
+            color: #ffffff;
             transform: translateY(-2px);
+        }
+
+        /* Toast Notification */
+        #toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: rgba(10, 10, 20, 0.92);
+            border: 1px solid #c084fc;
+            color: #ffffff;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-size: 0.86rem;
+            font-weight: 500;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(168, 85, 247, 0.4);
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+            opacity: 0;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 1000;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        #toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
         }
 
         /* Minimal Footer */
@@ -895,8 +1018,8 @@
             }
 
             .nav-capsule {
-                padding: 5px 12px;
-                font-size: 0.8rem;
+                padding: 4px 10px;
+                font-size: 0.82rem;
             }
 
             header {
@@ -908,7 +1031,7 @@
 </head>
 <body>
 
-    <!-- Fixed Persistent Background Canvas -->
+    <!-- Fixed Background Canvas -->
     <canvas id="heroCanvas"></canvas>
     <div class="canvas-overlay"></div>
 
@@ -924,11 +1047,11 @@
 
         <div class="nav-right">
             <div class="contact-dropdown-container">
-                <div class="nav-capsule contact-btn-trigger">
+                <div class="contact-btn-trigger">
                     Contact Me ▾
                 </div>
                 <div class="dropdown-menu">
-                    <a href="https://linkedin.com/in/adarshgandla" target="_blank" rel="noopener noreferrer" class="primary-link">
+                    <a href="https://linkedin.com/in/adarshgandla" target="_blank" rel="noopener noreferrer" class="primary-link" onclick="handleLinkedInClick(event)">
                         <span class="dropdown-icon">
                             <svg viewBox="0 0 24 24" fill="#0A66C2">
                                 <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
@@ -970,7 +1093,7 @@
         </div>
     </nav>
 
-    <!-- Header Section (Matching LinkedIn Headline & Subtitle) -->
+    <!-- Header Section -->
     <header>
         <div class="hero-text-block">
             <h1><span class="glass-name-text">Adarsh Gandla</span></h1>
@@ -982,7 +1105,7 @@
                     <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
                     <span>Email</span>
                 </a>
-                <a href="https://linkedin.com/in/adarshgandla" target="_blank" rel="noopener noreferrer">
+                <a href="https://linkedin.com/in/adarshgandla" target="_blank" rel="noopener noreferrer" onclick="handleLinkedInClick(event)">
                     <svg viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
                     <span>LinkedIn</span>
                 </a>
@@ -1066,12 +1189,21 @@
                     </div>
                 </div>
                 <ul>
-                    <li><strong>Publication:</strong> <a href="https://ijersem.com/72319-2/" target="_blank" class="entity-link"><em>Deep Learning-Based Route Optimization and Demand Forecasting for Smart Logistics</em></a> published in the International Journal of Emerging Research in Science, Engineering, and Management (IJERSEM).</li>
+                    <li><strong>Publication:</strong> <em>Deep Learning-Based Route Optimization and Demand Forecasting for Smart Logistics</em> published in the International Journal of Emerging Research in Science, Engineering, and Management (IJERSEM).</li>
                     <li>Architected a cloud-native, software-only logistics optimization system to solve complex routing and demand prediction challenges for delivery networks.</li>
                     <li>Implemented a route optimization engine in Python using Google OR-Tools to model and solve TSP/VRP style routing scenarios for cost, distance minimization, and eco-efficiency.</li>
                     <li>Built and trained an LSTM-based demand forecasting model in TensorFlow to predict product demand across locations and time periods.</li>
                 </ul>
-                <a href="https://smart-logistics-v4.vercel.app" target="_blank" class="btn">View Live App</a>
+
+                <!-- Side-by-Side Noticeable Action Buttons -->
+                <div class="card-btn-group">
+                    <a href="https://smart-logistics-v4.vercel.app" target="_blank" class="btn">
+                        <span>🚀 View Live App</span>
+                    </a>
+                    <a href="https://ijersem.com/72319-2/" target="_blank" rel="noopener noreferrer" class="btn">
+                        <span>📄 View Paper</span>
+                    </a>
+                </div>
             </div>
 
             <!-- Agriculture ML -->
@@ -1235,13 +1367,18 @@
     <div class="hero-art-showcase">
         <div class="present-card">
             <h4>Let's Build Something Impactful</h4>
-            <p>Ready to discuss computational intelligence, machine learning engineering, or software architecture opportunities.</p>
+            <p>Ready to discuss computational intelligence, machine learning engineering, or scalable software architecture opportunities.</p>
             <div class="present-links">
-                <a href="https://linkedin.com/in/adarshgandla" target="_blank" class="present-btn present-btn-primary">Connect on LinkedIn</a>
+                <a href="https://linkedin.com/in/adarshgandla" target="_blank" class="present-btn present-btn-primary" onclick="handleLinkedInClick(event)">
+                    <span>Connect on LinkedIn</span>
+                </a>
                 <a href="mailto:adarshgandla.tab@gmail.com?subject=Opportunity%20Discussion&body=Hi%20Adarsh,%0A%0AI%20am%20reaching%20out%20regarding%20an%20opportunity." class="present-btn present-btn-secondary">Send Email</a>
             </div>
         </div>
     </div>
+
+    <!-- Toast Notification Element -->
+    <div id="toast">📋 Customized LinkedIn note copied to clipboard!</div>
 
     <!-- Footer -->
     <footer>
@@ -1249,6 +1386,26 @@
     </footer>
 
     <script>
+        // --- 1. LINKEDIN PRE-FILLED NOTE CLIPBOARD HANDLER ---
+        const LINKEDIN_NOTE = "Hi Adarsh, I came across your portfolio website and would love to connect regarding your work in Computational Intelligence and Data Science!";
+
+        function handleLinkedInClick(e) {
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(LINKEDIN_NOTE).then(() => {
+                    showToast();
+                }).catch(() => {});
+            }
+        }
+
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3600);
+        }
+
+        // --- 2. CONFIGURATION & BACKGROUND FRAME SCRUBBING ---
         const TOTAL_FRAMES = 83;
         const HOLD_BUFFER = 28;
         const VIRTUAL_TOTAL = TOTAL_FRAMES + HOLD_BUFFER;
