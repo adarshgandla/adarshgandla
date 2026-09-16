@@ -355,57 +355,59 @@
             font-size: clamp(0.92rem, 1.6vw, 1.15rem);
             font-weight: 500;
             max-width: 750px;
-            margin-bottom: 1.6rem;
+            margin-bottom: 1.5rem;
             line-height: 1.5;
             text-shadow: 0 2px 14px rgba(0, 0, 0, 0.95);
         }
 
-        /* High-Contrast Hero Contact Pills */
+        /* --- BALANCED, CLEAN & NOTICEABLE HERO BUTTONS --- */
         .contact-links {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 12px;
-            margin-top: 4px;
+            gap: 10px;
+            margin-top: 2px;
         }
 
         .contact-links a {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            color: #ffffff;
+            gap: 7px;
+            color: #f1f5f9;
             text-decoration: none;
-            background: rgba(12, 12, 22, 0.72);
-            border: 1px solid rgba(168, 85, 247, 0.35);
-            padding: 8px 20px;
+            background: rgba(10, 10, 20, 0.28); /* Lightweight dark frost */
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            padding: 6px 15px;
             border-radius: 50px;
-            font-size: 0.88rem;
-            font-weight: 600;
+            font-size: 0.84rem;
+            font-weight: 500;
             letter-spacing: 0.3px;
-            -webkit-backdrop-filter: blur(10px);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+            -webkit-backdrop-filter: blur(8px);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
             transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .contact-links a svg {
-            width: 15px;
-            height: 15px;
+            width: 13px;
+            height: 13px;
             fill: currentColor;
+            opacity: 0.9;
             flex-shrink: 0;
             transition: transform 0.2s ease;
         }
 
         .contact-links a:hover {
-            background: rgba(22, 18, 38, 0.88);
-            border-color: var(--accent-2);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 22px rgba(168, 85, 247, 0.45), 0 0 12px rgba(99, 102, 241, 0.35);
+            background: rgba(20, 16, 35, 0.65);
+            border-color: rgba(168, 85, 247, 0.6);
             color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 14px rgba(168, 85, 247, 0.35);
         }
 
         .contact-links a:hover svg {
             transform: scale(1.15);
+            opacity: 1;
         }
 
         /* Container & Cards */
@@ -918,7 +920,7 @@
             <h1><span class="color-wave-text">Adarsh G</span></h1>
             <h2>Software Engineer | Machine Learning & Data Science | Computational Intelligence</h2>
             
-            <!-- High-Contrast, Sleek Glass Contact Links with Icons -->
+            <!-- High-Contrast, Balanced Frosted Glass Contact Links -->
             <div class="contact-links">
                 <a href="mailto:adarshgandla.tab@gmail.com?subject=Connecting%20via%20your%20Portfolio&body=Hi%20Adarsh,%0A%0AI%20came%20across%20your%20portfolio%20website%20and%20wanted%20to%20reach%20out%20to%20connect.">
                     <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
@@ -1134,7 +1136,7 @@
             <div class="card">
                 <div class="card-entity-header">
                     <a href="https://sistk.org/" target="_blank" rel="noopener noreferrer">
-                        <img src="Logos/sistk-logo.webp" alt="Siddartha Institute of Science and Technology" class="entity-logo" onerror="this.onerror=null;">
+                        <img src="Logos/siddartha-logo.webp" alt="Siddartha Institute of Science and Technology" class="entity-logo" onerror="this.onerror=null;">
                     </a>
                     <div class="entity-title-wrap">
                         <h4>B.Tech in Computer Science and Engineering</h4>
