@@ -146,7 +146,7 @@
             100% { background-position: 250% center; }
         }
 
-        /* --- CONTINUOUS ROTATING NEON RING FOR PROFILE AVATAR --- */
+        /* Upright Profile Avatar with Static Pulse */
         .profile-badge-wrapper {
             position: relative;
             z-index: 110;
@@ -157,8 +157,9 @@
             height: 44px;
             border-radius: 50%;
             padding: 2.5px;
-            background: conic-gradient(from 0deg, #c084fc, #818cf8, #38bdf8, #f472b6, #c084fc);
-            animation: spinProfileRing 4s linear infinite;
+            background: linear-gradient(135deg, #c084fc, #818cf8, #38bdf8, #f472b6);
+            background-size: 300% 300%;
+            animation: staticNeonPulse 5s ease infinite alternate;
             box-shadow: 0 0 14px rgba(192, 132, 252, 0.55);
             cursor: pointer;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -169,9 +170,10 @@
             box-shadow: 0 0 22px rgba(192, 132, 252, 0.9), 0 0 35px rgba(56, 189, 248, 0.5);
         }
 
-        @keyframes spinProfileRing {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        @keyframes staticNeonPulse {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .profile-avatar-thumb {
@@ -181,13 +183,6 @@
             object-fit: cover;
             display: block;
             background: #0a0a14;
-            /* Counter-rotate inside so picture stays right-side up */
-            animation: unspinProfileRing 4s linear infinite;
-        }
-
-        @keyframes unspinProfileRing {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(-360deg); }
         }
 
         .profile-popover {
@@ -232,7 +227,7 @@
             font-weight: 500;
         }
 
-        /* --- CONTACT TRIGGER (LIGHT GLASS + SUBTLE COLOR FLOW TEXT) --- */
+        /* Contact Trigger */
         .contact-dropdown-container {
             position: relative;
             display: inline-block;
@@ -593,7 +588,7 @@
             padding: clamp(1.4rem, 2.5vw, 2.2rem);
             margin-bottom: 24px;
             position: relative;
-            overflow: hidden;
+            overflow: visible;
             -webkit-backdrop-filter: blur(3px);
             backdrop-filter: blur(3px);
             cursor: pointer;
@@ -617,6 +612,7 @@
             left: 0;
             right: 0;
             bottom: 0;
+            border-radius: 20px;
             background: radial-gradient(
                 750px circle at var(--mouse-x, -999px) var(--mouse-y, -999px),
                 rgba(168, 85, 247, 0.18),
@@ -645,7 +641,16 @@
             margin-bottom: 12px;
         }
 
-        /* Pure Image Logo */
+        /* Logo Popover Wrapper */
+        .logo-popover-wrapper {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            z-index: 15;
+        }
+
         .entity-logo {
             width: 52px;
             height: 52px;
@@ -656,16 +661,60 @@
             border-radius: 8px;
             object-fit: contain;
             box-shadow: none !important;
-            flex-shrink: 0;
             display: block;
             cursor: pointer;
             transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.3s ease;
         }
 
-        .entity-logo:hover,
-        .card:hover .entity-logo {
-            transform: scale(1.22);
-            filter: drop-shadow(0 4px 12px rgba(192, 132, 252, 0.7)) drop-shadow(0 0 6px rgba(255, 255, 255, 0.4));
+        .logo-popover-wrapper:hover .entity-logo {
+            transform: scale(1.15);
+            filter: drop-shadow(0 4px 12px rgba(192, 132, 252, 0.7));
+        }
+
+        /* Glass Inspect Popover */
+        .logo-popover {
+            position: absolute;
+            bottom: calc(100% + 14px);
+            left: 50%;
+            transform: translateX(-50%) translateY(8px) scale(0.85);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            background: rgba(12, 12, 24, 0.96);
+            border: 1px solid rgba(192, 132, 252, 0.4);
+            border-radius: 18px;
+            padding: 10px;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.85), 0 0 24px rgba(168, 85, 247, 0.4);
+            -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(16px);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 200;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .logo-popover-wrapper:hover .logo-popover {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0) scale(1);
+        }
+
+        .logo-popover img {
+            width: 130px;
+            height: 130px;
+            object-fit: contain;
+            border-radius: 12px;
+            display: block;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .logo-popover span {
+            display: block;
+            margin-top: 6px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: #f1f5f9;
+            letter-spacing: 0.3px;
         }
 
         .entity-title-wrap h4 {
@@ -684,7 +733,7 @@
             display: inline-block;
         }
 
-        /* --- CONTINUOUS COLOR-FLOWING TEXT LINKS --- */
+        /* Continuous Color-Flowing Text Links */
         .entity-link {
             display: inline;
             background: linear-gradient(
@@ -741,7 +790,7 @@
             margin-top: 16px;
         }
 
-        /* Light Glass Action Buttons ("View Live App" & "View Paper") */
+        /* Light Glass Action Buttons */
         .btn {
             display: inline-flex;
             align-items: center;
@@ -981,16 +1030,16 @@
             transform: translateY(-2px);
         }
 
-        /* Toast Notification */
+        /* Common Notification Toast */
         #toast {
             position: fixed;
             bottom: 30px;
             left: 50%;
             transform: translateX(-50%) translateY(100px);
-            background: rgba(10, 10, 20, 0.92);
+            background: rgba(10, 10, 20, 0.94);
             border: 1px solid #c084fc;
             color: #ffffff;
-            padding: 12px 24px;
+            padding: 12px 26px;
             border-radius: 50px;
             font-size: 0.86rem;
             font-weight: 500;
@@ -1122,7 +1171,7 @@
                 </div>
             </div>
 
-            <!-- Profile Avatar with Rotating Neon Ring -->
+            <!-- Profile Avatar with Static Upright Neon Border -->
             <div class="profile-badge-wrapper">
                 <img src="profile.jpeg" alt="Adarsh Gandla" class="profile-avatar-thumb" onerror="this.onerror=null; this.src='profile.jpg';">
                 <div class="profile-popover">
@@ -1220,9 +1269,13 @@
             <!-- Smart Logistics -->
             <div class="card">
                 <div class="card-entity-header">
-                    <a href="https://smart-logistics-v4.vercel.app" target="_blank" rel="noopener noreferrer">
+                    <div class="logo-popover-wrapper">
                         <img src="Logos/smart-logistics-logo.webp" alt="Smart Logistics" class="entity-logo" onerror="this.onerror=null;">
-                    </a>
+                        <div class="logo-popover">
+                            <img src="Logos/smart-logistics-logo.webp" alt="Smart Logistics" onerror="this.onerror=null;">
+                            <span>Smart Logistics Platform</span>
+                        </div>
+                    </div>
                     <div class="entity-title-wrap">
                         <h4>Smart Logistics: AI Route & Demand Optimization Platform</h4>
                         <div class="date">Academic Project & Live Deployment | Nov 2025 – Apr 2026</div>
@@ -1231,7 +1284,6 @@
                 <ul>
                     <li>
                         <strong>Publication:</strong> 
-                        <!-- Restored Colorful Dynamic Link on the Paper Title -->
                         <a href="https://ijersem.com/72319-2/" target="_blank" rel="noopener noreferrer" class="entity-link">
                             <em>Deep Learning-Based Route Optimization and Demand Forecasting for Smart Logistics</em>
                         </a> 
@@ -1242,7 +1294,6 @@
                     <li>Built and trained an LSTM-based demand forecasting model in TensorFlow to predict product demand across locations and time periods.</li>
                 </ul>
 
-                <!-- Side-by-Side Action Buttons with Identical Styling -->
                 <div class="card-btn-group">
                     <a href="https://smart-logistics-v4.vercel.app" target="_blank" class="btn">
                         <span>🚀 View Live App</span>
@@ -1256,7 +1307,13 @@
             <!-- Agriculture ML -->
             <div class="card">
                 <div class="card-entity-header">
-                    <img src="Logos/agri-ml-logo.webp" alt="Machine Learning for Agriculture" class="entity-logo" onerror="this.onerror=null;">
+                    <div class="logo-popover-wrapper">
+                        <img src="Logos/agri-ml-logo.webp" alt="Machine Learning for Agriculture" class="entity-logo" onerror="this.onerror=null;">
+                        <div class="logo-popover">
+                            <img src="Logos/agri-ml-logo.webp" alt="Machine Learning for Agriculture" onerror="this.onerror=null;">
+                            <span>Crop Yield Prediction ML</span>
+                        </div>
+                    </div>
                     <div class="entity-title-wrap">
                         <h4>Machine Learning for Agriculture</h4>
                         <div class="date">Academic Project | 2024</div>
@@ -1271,7 +1328,13 @@
             <!-- Skin Cancer Detection -->
             <div class="card">
                 <div class="card-entity-header">
-                    <img src="Logos/cancer-ml-logo.webp" alt="ML-Based Early Skin Cancer Detection" class="entity-logo" onerror="this.onerror=null;">
+                    <div class="logo-popover-wrapper">
+                        <img src="Logos/cancer-ml-logo.webp" alt="ML-Based Early Skin Cancer Detection" class="entity-logo" onerror="this.onerror=null;">
+                        <div class="logo-popover">
+                            <img src="Logos/cancer-ml-logo.webp" alt="ML-Based Early Skin Cancer Detection" onerror="this.onerror=null;">
+                            <span>Skin Cancer Detection AI</span>
+                        </div>
+                    </div>
                     <div class="entity-title-wrap">
                         <h4>ML-Based Early Skin Cancer Detection</h4>
                         <div class="date">Faculty Research Support | 2024</div>
@@ -1290,9 +1353,13 @@
             <!-- D Square Consulting Services -->
             <div class="card">
                 <div class="card-entity-header">
-                    <a href="https://dsquareconsulting.com/" target="_blank" rel="noopener noreferrer">
+                    <div class="logo-popover-wrapper">
                         <img src="Logos/dsquare-logo.webp" alt="D Square Consulting Services" class="entity-logo" onerror="this.onerror=null;">
-                    </a>
+                        <div class="logo-popover">
+                            <img src="Logos/dsquare-logo.webp" alt="D Square Consulting Services" onerror="this.onerror=null;">
+                            <span>D Square Consulting Services</span>
+                        </div>
+                    </div>
                     <div class="company-title-wrap">
                         <h4>AI-ML Apprentice</h4>
                         <div class="date">
@@ -1310,9 +1377,13 @@
             <!-- EduNoVerse -->
             <div class="card">
                 <div class="card-entity-header">
-                    <a href="https://edunoversetechsolutions.com/" target="_blank" rel="noopener noreferrer">
+                    <div class="logo-popover-wrapper">
                         <img src="Logos/edunoverse-logo.webp" alt="EduNoVerse Tech Solutions" class="entity-logo" onerror="this.onerror=null;">
-                    </a>
+                        <div class="logo-popover">
+                            <img src="Logos/edunoverse-logo.webp" alt="EduNoVerse Tech Solutions" onerror="this.onerror=null;">
+                            <span>EduNoVerse Tech Solutions</span>
+                        </div>
+                    </div>
                     <div class="entity-title-wrap">
                         <h4>Data Science Intern</h4>
                         <div class="date">
@@ -1328,9 +1399,13 @@
             <!-- VaultofCodes -->
             <div class="card">
                 <div class="card-entity-header">
-                    <a href="https://www.vaultofcodes.in/" target="_blank" rel="noopener noreferrer">
+                    <div class="logo-popover-wrapper">
                         <img src="Logos/vaultofcodes-logo.webp" alt="VaultofCodes.in" class="entity-logo" onerror="this.onerror=null;">
-                    </a>
+                        <div class="logo-popover">
+                            <img src="Logos/vaultofcodes-logo.webp" alt="VaultofCodes.in" onerror="this.onerror=null;">
+                            <span>VaultofCodes.in</span>
+                        </div>
+                    </div>
                     <div class="entity-title-wrap">
                         <h4>Java Programming Intern</h4>
                         <div class="date">
@@ -1347,9 +1422,13 @@
             <!-- Pantech -->
             <div class="card">
                 <div class="card-entity-header">
-                    <a href="https://pantechelearning.com/" target="_blank" rel="noopener noreferrer">
+                    <div class="logo-popover-wrapper">
                         <img src="Logos/pantech-logo.webp" alt="Pantech e Learning" class="entity-logo" onerror="this.onerror=null;">
-                    </a>
+                        <div class="logo-popover">
+                            <img src="Logos/pantech-logo.webp" alt="Pantech e Learning" onerror="this.onerror=null;">
+                            <span>Pantech e Learning Pvt Ltd</span>
+                        </div>
+                    </div>
                     <div class="entity-title-wrap">
                         <h4>Data Science Intern</h4>
                         <div class="date">
@@ -1370,9 +1449,13 @@
             <!-- Siddhartha Institute (SISTK) -->
             <div class="card">
                 <div class="card-entity-header">
-                    <a href="https://sistk.org/" target="_blank" rel="noopener noreferrer">
+                    <div class="logo-popover-wrapper">
                         <img src="Logos/sistk-logo.webp" alt="Siddartha Institute of Science and Technology" class="entity-logo" onerror="this.onerror=null;">
-                    </a>
+                        <div class="logo-popover">
+                            <img src="Logos/sistk-logo.webp" alt="Siddartha Institute of Science and Technology" onerror="this.onerror=null;">
+                            <span>SISTK Puttur</span>
+                        </div>
+                    </div>
                     <div class="entity-title-wrap">
                         <h4>B.Tech in Computer Science and Engineering</h4>
                         <div class="date">
@@ -1439,13 +1522,14 @@
         function handleLinkedInClick(e) {
             if (navigator.clipboard && window.isSecureContext) {
                 navigator.clipboard.writeText(LINKEDIN_NOTE).then(() => {
-                    showToast();
+                    showToast("📋 Customized LinkedIn note copied to clipboard!");
                 }).catch(() => {});
             }
         }
 
-        function showToast() {
+        function showToast(text) {
             const toast = document.getElementById('toast');
+            toast.innerText = text;
             toast.classList.add('show');
             setTimeout(() => {
                 toast.classList.remove('show');
@@ -1537,6 +1621,62 @@
 
         resizeCanvas();
 
+        // --- 3. 7-SECOND IDLE AUTO-SCROLL (ONCE PER PAGE LOAD) ---
+        let autoScrollTriggered = false;
+        let isAutoScrolling = false;
+        let idleTimer = null;
+
+        function startAutoScroll() {
+            if (autoScrollTriggered) return;
+            autoScrollTriggered = true;
+            isAutoScrolling = true;
+
+            showToast("✨ Auto-scrolling due to inactivity — interact anytime to pause");
+
+            const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollSpeed = 1.6; // Smooth reading pace
+
+            function step() {
+                if (!isAutoScrolling) return;
+
+                if (window.scrollY < maxScroll - 4) {
+                    window.scrollBy(0, scrollSpeed);
+                    requestAnimationFrame(step);
+                } else {
+                    isAutoScrolling = false;
+                }
+            }
+            requestAnimationFrame(step);
+        }
+
+        function stopAutoScrollOnUserInteraction() {
+            if (isAutoScrolling) {
+                isAutoScrolling = false;
+            }
+            if (!autoScrollTriggered && idleTimer) {
+                clearTimeout(idleTimer);
+                resetIdleTimer();
+            }
+        }
+
+        function resetIdleTimer() {
+            if (autoScrollTriggered) return;
+            clearTimeout(idleTimer);
+            idleTimer = setTimeout(() => {
+                if (window.scrollY < 80) { // Only triggers if user has not scrolled down yet
+                    startAutoScroll();
+                }
+            }, 7000); // 7 seconds
+        }
+
+        // Listeners for user activity
+        ['wheel', 'touchstart', 'keydown', 'mousedown'].forEach(evt => {
+            window.addEventListener(evt, stopAutoScrollOnUserInteraction, { passive: true });
+        });
+
+        resetIdleTimer();
+
+        // --- 4. CARD SPOTLIGHT HOVER EFFECT ---
         const cards = document.querySelectorAll('.card');
         cards.forEach(card => {
             card.addEventListener('mousemove', (e) => {
@@ -1549,6 +1689,7 @@
             });
         });
 
+        // --- 5. INTERSECTION OBSERVER FOR FADE-IN SECTIONS ---
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
