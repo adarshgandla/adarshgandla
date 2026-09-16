@@ -76,7 +76,7 @@
             display: flex;
             justify-content: flex-end;
             align-items: center;
-            padding: 16px 4%;
+            padding: 18px 4%;
             position: sticky;
             top: 0;
             width: 100%;
@@ -221,14 +221,14 @@
             position: absolute;
             top: calc(100% + 10px);
             right: 0;
-            min-width: 190px;
-            background: rgba(10, 10, 18, 0.9);
+            min-width: 220px;
+            background: rgba(10, 10, 18, 0.94);
             border: 1px solid var(--glass-border);
             border-radius: 16px;
             padding: 8px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
-            -webkit-backdrop-filter: blur(14px);
-            backdrop-filter: blur(14px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
+            -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(16px);
             opacity: 0;
             visibility: hidden;
             transform: translateY(-8px);
@@ -245,14 +245,34 @@
         .dropdown-menu a {
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 10px 14px;
-            border-radius: 10px;
+            gap: 14px;
+            padding: 12px 16px;
+            border-radius: 12px;
             color: #cbd5e1;
             text-decoration: none;
-            font-size: 0.88rem;
+            font-size: 0.92rem;
             font-weight: 500;
-            transition: all 0.2s ease;
+            transition: all 0.25s ease;
+        }
+
+        .dropdown-icon {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.25s ease, filter 0.25s ease;
+        }
+
+        .dropdown-icon svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .dropdown-menu a:hover .dropdown-icon {
+            transform: scale(1.18);
         }
 
         .dropdown-menu a:hover {
@@ -261,19 +281,32 @@
         }
 
         .dropdown-menu a.primary-link {
-            background: rgba(99, 102, 241, 0.25);
-            border: 1px solid rgba(99, 102, 241, 0.4);
+            background: rgba(10, 102, 194, 0.2);
+            border: 1px solid rgba(10, 102, 194, 0.45);
             color: #ffffff;
             font-weight: 600;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
         }
 
         .dropdown-menu a.primary-link:hover {
-            background: rgba(99, 102, 241, 0.45);
-            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+            background: rgba(10, 102, 194, 0.38);
+            border-color: #0a66c2;
+            box-shadow: 0 4px 16px rgba(10, 102, 194, 0.5);
         }
 
-        /* Hero / Header Section: Shifted lower specifically over white shirt */
+        .dropdown-menu a.primary-link:hover .dropdown-icon {
+            filter: drop-shadow(0 0 6px #0a66c2);
+        }
+
+        .dropdown-menu a.email-link:hover .dropdown-icon {
+            filter: drop-shadow(0 0 6px #ea4335);
+        }
+
+        .dropdown-menu a.github-link:hover .dropdown-icon {
+            filter: drop-shadow(0 0 6px #ffffff);
+        }
+
+        /* Hero / Header Section */
         header {
             min-height: 88vh;
             display: flex;
@@ -815,14 +848,37 @@
                     Contact Me ▾
                 </div>
                 <div class="dropdown-menu">
-                    <a href="https://linkedin.com/in/adarshgandla" target="_blank" class="primary-link">
-                        <span>💼</span> LinkedIn (Primary)
+                    <!-- High-Definition LinkedIn Logo -->
+                    <a href="https://linkedin.com/in/adarshgandla" target="_blank" rel="noopener noreferrer" class="primary-link">
+                        <span class="dropdown-icon">
+                            <svg viewBox="0 0 24 24" fill="#0A66C2">
+                                <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+                            </svg>
+                        </span>
+                        <span>LinkedIn (Primary)</span>
                     </a>
-                    <a href="mailto:adarshgandla.tab@gmail.com?subject=Connecting%20via%20your%20Portfolio&body=Hi%20Adarsh,%0A%0AI%20came%20across%20your%20portfolio%20website%20and%20wanted%20to%20reach%20out." class="secondary-link">
-                        <span>✉️</span> Mail Me
+
+                    <!-- High-Definition Google Mail Logo -->
+                    <a href="mailto:adarshgandla.tab@gmail.com?subject=Connecting%20via%20your%20Portfolio&body=Hi%20Adarsh,%0A%0AI%20came%20across%20your%20portfolio%20website%20and%20wanted%20to%20reach%20out." class="secondary-link email-link">
+                        <span class="dropdown-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path fill="#4285F4" d="M20.5 4h-17A1.5 1.5 0 0 0 2 5.5v13A1.5 1.5 0 0 0 3.5 20h17a1.5 1.5 0 0 0 1.5-1.5v-13A1.5 1.5 0 0 0 20.5 4z"/>
+                                <path fill="#EA4335" d="m22 6.5-10 6.5-10-6.5V5.5l10 6.5 10-6.5v1z"/>
+                                <path fill="#FBBC05" d="M2 6.5 12 13v7H3.5A1.5 1.5 0 0 1 2 18.5v-12z"/>
+                                <path fill="#34A853" d="m22 6.5-10 6.5v7h8.5a1.5 1.5 0 0 0 1.5-1.5v-12z"/>
+                            </svg>
+                        </span>
+                        <span>Mail Me</span>
                     </a>
-                    <a href="https://github.com/adarsh-gandla" target="_blank" class="secondary-link">
-                        <span>💻</span> GitHub
+
+                    <!-- High-Definition GitHub Logo -->
+                    <a href="https://github.com/adarsh-gandla" target="_blank" rel="noopener noreferrer" class="secondary-link github-link">
+                        <span class="dropdown-icon">
+                            <svg viewBox="0 0 24 24" fill="#FFFFFF">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/>
+                            </svg>
+                        </span>
+                        <span>GitHub</span>
                     </a>
                 </div>
             </div>
@@ -912,7 +968,7 @@
             <div class="card">
                 <div class="card-entity-header">
                     <a href="https://smart-logistics-v4.vercel.app" target="_blank" rel="noopener noreferrer">
-                        <img src="Logos/smart-logistics-logo.png" alt="Smart Logistics" class="entity-logo">
+                        <img src="Logos/smart-logistics-logo.webp" alt="Smart Logistics" class="entity-logo" onerror="this.src='Logos/smart-logistics-logo.png'">
                     </a>
                     <div class="entity-title-wrap">
                         <h4>Smart Logistics: AI Route & Demand Optimization Platform</h4>
@@ -931,7 +987,7 @@
             <!-- Agriculture ML -->
             <div class="card">
                 <div class="card-entity-header">
-                    <img src="Logos/agri-ml-logo.png" alt="Machine Learning for Agriculture" class="entity-logo">
+                    <img src="Logos/agri-ml-logo.webp" alt="Machine Learning for Agriculture" class="entity-logo" onerror="this.src='Logos/agri-ml-logo.png'">
                     <div class="entity-title-wrap">
                         <h4>Machine Learning for Agriculture</h4>
                         <div class="date">Academic Project | 2024</div>
@@ -946,7 +1002,7 @@
             <!-- Skin Cancer Detection -->
             <div class="card">
                 <div class="card-entity-header">
-                    <img src="Logos/cancer-ml-logo.png" alt="ML-Based Early Skin Cancer Detection" class="entity-logo">
+                    <img src="Logos/cancer-ml-logo.webp" alt="ML-Based Early Skin Cancer Detection" class="entity-logo" onerror="this.src='Logos/cancer-ml-logo.png'">
                     <div class="entity-title-wrap">
                         <h4>ML-Based Early Skin Cancer Detection</h4>
                         <div class="date">Faculty Research Support | 2024</div>
@@ -966,12 +1022,12 @@
             <div class="card">
                 <div class="card-entity-header">
                     <a href="https://dsquareconsulting.com/" target="_blank" rel="noopener noreferrer">
-                        <img src="Logos/dsquare-logo.png" alt="D Square Consulting Services" class="entity-logo">
+                        <img src="Logos/dsquare-logo.webp" alt="D Square Consulting Services" class="entity-logo" onerror="this.src='Logos/dsquare-logo.png'">
                     </a>
-                    <div class="entity-title-wrap">
+                    <div class="company-title-wrap">
                         <h4>AI-ML Apprentice</h4>
                         <div class="date">
-                            <a href="https://dsquareconsulting.com/" target="_blank" rel="noopener noreferrer" class="entity-link">D Square Consulting Services</a> | May 2026 – Present
+                            <a href="https://dsquareconsulting.com/" target="_blank" rel="noopener noreferrer" class="company-link">D Square Consulting Services</a> | May 2026 – Present
                         </div>
                     </div>
                 </div>
@@ -986,7 +1042,7 @@
             <div class="card">
                 <div class="card-entity-header">
                     <a href="https://edunoversetechsolutions.com/" target="_blank" rel="noopener noreferrer">
-                        <img src="Logos/edunoverse-logo.png" alt="EduNoVerse Tech Solutions" class="entity-logo">
+                        <img src="Logos/edunoverse-logo.webp" alt="EduNoVerse Tech Solutions" class="entity-logo" onerror="this.src='Logos/edunoverse-logo.png'">
                     </a>
                     <div class="entity-title-wrap">
                         <h4>Data Science Intern</h4>
@@ -1004,7 +1060,7 @@
             <div class="card">
                 <div class="card-entity-header">
                     <a href="https://www.vaultofcodes.in/" target="_blank" rel="noopener noreferrer">
-                        <img src="Logos/vaultofcodes-logo.png" alt="VaultofCodes.in" class="entity-logo">
+                        <img src="Logos/vaultofcodes-logo.webp" alt="VaultofCodes.in" class="entity-logo" onerror="this.src='Logos/vaultofcodes-logo.png'">
                     </a>
                     <div class="entity-title-wrap">
                         <h4>Java Programming Intern</h4>
@@ -1023,7 +1079,7 @@
             <div class="card">
                 <div class="card-entity-header">
                     <a href="https://pantechelearning.com/" target="_blank" rel="noopener noreferrer">
-                        <img src="Logos/pantech-logo.png" alt="Pantech e Learning" class="entity-logo">
+                        <img src="Logos/pantech-logo.webp" alt="Pantech e Learning" class="entity-logo" onerror="this.src='Logos/pantech-logo.png'">
                     </a>
                     <div class="entity-title-wrap">
                         <h4>Data Science Intern</h4>
@@ -1046,7 +1102,7 @@
             <div class="card">
                 <div class="card-entity-header">
                     <a href="https://sistk.org/" target="_blank" rel="noopener noreferrer">
-                        <img src="Logos/siddartha-logo.png" alt="Siddartha Institute of Science and Technology" class="entity-logo">
+                        <img src="Logos/sistk-logo.webp" alt="Siddartha Institute of Science and Technology" class="entity-logo" onerror="this.src='Logos/sistk-logo.png'">
                     </a>
                     <div class="entity-title-wrap">
                         <h4>B.Tech in Computer Science and Engineering</h4>
@@ -1155,17 +1211,13 @@
             let renderWidth, renderHeight, offsetX, offsetY;
 
             if (canvasRatio > imageRatio) {
-                // Screen is wider than image: scale to width
                 renderWidth = cWidth;
                 renderHeight = cWidth / imageRatio;
                 offsetX = 0;
-                // Anchor near top to preserve full hair and head area
                 offsetY = Math.min(0, (cHeight - renderHeight) * 0.15);
             } else {
-                // Screen is taller than image: scale to height
                 renderWidth = cHeight * imageRatio;
                 renderHeight = cHeight;
-                // Center horizontally
                 offsetX = (cWidth - renderWidth) / 2;
                 offsetY = 0;
             }
