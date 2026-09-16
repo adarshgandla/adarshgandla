@@ -13,10 +13,6 @@
             --accent-1: #6366f1;
             --accent-2: #a855f7;
 
-            /* High Visibility Accent for Links */
-            --link-color: #38bdf8;
-            --link-hover: #c084fc;
-
             /* 95% Transparent Glass for Cards */
             --glass-bg-95: rgba(255, 255, 255, 0.05);
             --glass-border: rgba(255, 255, 255, 0.12);
@@ -338,48 +334,43 @@
             letter-spacing: -0.5px;
         }
 
-        /* --- PURE GLASS-EFFECT ON TEXT LETTERS ONLY (NO FLOATING PLACEHOLDER) --- */
+        /* --- VIBRANT NEON GLASS TEXT (NO DULL GRAY) --- */
         .glass-name-text {
             display: inline-block;
             background: linear-gradient(
                 135deg, 
-                rgba(255, 255, 255, 0.95) 0%, 
-                rgba(56, 189, 248, 0.75) 20%, 
-                rgba(192, 132, 252, 0.85) 45%, 
-                rgba(255, 255, 255, 0.95) 60%, 
-                rgba(244, 114, 182, 0.8) 80%, 
-                rgba(56, 189, 248, 0.9) 100%
+                #ffffff 0%, 
+                #c084fc 25%, 
+                #d946ef 50%, 
+                #818cf8 75%, 
+                #ffffff 100%
             );
             background-size: 300% 300%;
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: glassRefractShift 7s ease-in-out infinite alternate, neonGlassAura 4s ease-in-out infinite alternate;
-            text-shadow: 0 4px 18px rgba(0, 0, 0, 0.9);
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.8));
+            animation: vibrantNeonShift 6s ease-in-out infinite alternate, vibrantGlowPulse 4s ease-in-out infinite alternate;
+            filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 20px rgba(192, 132, 252, 0.6));
         }
 
-        @keyframes glassRefractShift {
+        @keyframes vibrantNeonShift {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
 
-        @keyframes neonGlassAura {
+        @keyframes vibrantGlowPulse {
             0% {
-                filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.6)) drop-shadow(0 0 25px rgba(99, 102, 241, 0.45));
-            }
-            50% {
-                filter: drop-shadow(0 0 16px rgba(192, 132, 252, 0.8)) drop-shadow(0 0 32px rgba(168, 85, 247, 0.5));
+                filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 16px rgba(192, 132, 252, 0.75)) drop-shadow(0 0 30px rgba(99, 102, 241, 0.45));
             }
             100% {
-                filter: drop-shadow(0 0 14px rgba(244, 114, 182, 0.7)) drop-shadow(0 0 28px rgba(56, 189, 248, 0.5));
+                filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 22px rgba(217, 70, 239, 0.85)) drop-shadow(0 0 36px rgba(129, 140, 248, 0.55));
             }
         }
 
-        /* Exact LinkedIn Matching Subtitle & Tagline */
+        /* LinkedIn Matching Subtitle & Tagline */
         header h2 {
-            color: #f1f5f9;
+            color: #f8fafc;
             font-size: clamp(0.95rem, 1.8vw, 1.22rem);
             font-weight: 600;
             max-width: 820px;
@@ -390,15 +381,15 @@
         }
 
         .hero-tagline {
-            color: #38bdf8;
+            color: #c084fc;
             font-size: clamp(0.85rem, 1.4vw, 1rem);
             font-weight: 500;
             letter-spacing: 0.4px;
             margin-bottom: 1.4rem;
-            text-shadow: 0 0 12px rgba(56, 189, 248, 0.5), 0 2px 10px rgba(0, 0, 0, 0.9);
+            text-shadow: 0 0 12px rgba(192, 132, 252, 0.5), 0 2px 10px rgba(0, 0, 0, 0.9);
         }
 
-        /* Hero Contact Pills Matching Top Capsule Theme */
+        /* Hero Contact Pills */
         .contact-links {
             display: flex;
             flex-wrap: wrap;
@@ -593,8 +584,8 @@
 
         .card:hover .entity-logo {
             transform: scale(1.08);
-            border-color: rgba(56, 189, 248, 0.5);
-            box-shadow: 0 8px 24px rgba(56, 189, 248, 0.35);
+            border-color: rgba(192, 132, 252, 0.5);
+            box-shadow: 0 8px 24px rgba(168, 85, 247, 0.35);
         }
 
         .entity-title-wrap h4 {
@@ -613,19 +604,36 @@
             display: inline-block;
         }
 
-        /* --- LUMINESCENT, HIGH-CONTRAST LINKS FOR EXPERIENCES & ENTITIES --- */
+        /* --- DYNAMIC COLOR-CHANGING NEON LINKS (MATCHED TO PAGE THEME) --- */
         .entity-link {
-            color: var(--link-color);
+            display: inline;
+            background: linear-gradient(
+                90deg, 
+                #c084fc 0%, 
+                #818cf8 35%, 
+                #38bdf8 70%, 
+                #f472b6 85%, 
+                #c084fc 100%
+            );
+            background-size: 250% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
             text-decoration: none;
             font-weight: 600;
-            transition: all 0.2s ease;
-            text-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+            animation: neonLinkFlow 5s linear infinite;
+            transition: filter 0.25s ease;
+        }
+
+        @keyframes neonLinkFlow {
+            0% { background-position: 0% center; }
+            100% { background-position: 250% center; }
         }
 
         .entity-link:hover {
-            color: var(--link-hover);
+            filter: drop-shadow(0 0 10px rgba(192, 132, 252, 0.8)) drop-shadow(0 0 18px rgba(129, 140, 248, 0.6));
             text-decoration: underline;
-            text-shadow: 0 0 14px rgba(192, 132, 252, 0.8);
+            text-decoration-color: #c084fc;
         }
 
         .card ul {
@@ -649,28 +657,43 @@
             margin-bottom: 8px;
         }
 
-        /* Certificate Badges */
+        /* Dynamic Color-Changing Certificate Badges */
         .cert-link {
             display: inline-flex;
             align-items: center;
             gap: 6px;
             font-size: 0.8rem;
-            color: var(--link-color);
-            text-decoration: none;
-            background: rgba(56, 189, 248, 0.12);
-            border: 1px solid rgba(56, 189, 248, 0.35);
+            background: rgba(168, 85, 247, 0.12);
+            border: 1px solid rgba(192, 132, 252, 0.35);
             padding: 3px 12px;
             border-radius: 20px;
             margin-left: 8px;
-            transition: all 0.2s ease;
+            text-decoration: none;
+            transition: all 0.25s ease;
+        }
+
+        .cert-link span {
+            background: linear-gradient(
+                90deg, 
+                #c084fc 0%, 
+                #818cf8 35%, 
+                #38bdf8 70%, 
+                #f472b6 85%, 
+                #c084fc 100%
+            );
+            background-size: 250% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 600;
+            animation: neonLinkFlow 5s linear infinite;
         }
 
         .cert-link:hover {
-            background: rgba(56, 189, 248, 0.3);
-            border-color: #38bdf8;
-            color: #ffffff;
+            background: rgba(168, 85, 247, 0.28);
+            border-color: #c084fc;
             transform: translateY(-1px);
-            box-shadow: 0 0 12px rgba(56, 189, 248, 0.5);
+            box-shadow: 0 0 14px rgba(192, 132, 252, 0.6);
         }
 
         .skills-group {
@@ -684,7 +707,7 @@
         .skills-group h4 {
             font-size: 0.95rem;
             font-weight: 600;
-            color: var(--link-color);
+            color: #c084fc;
             text-transform: uppercase;
             letter-spacing: 0.8px;
             margin-bottom: 12px;
@@ -844,7 +867,7 @@
                  1px -1px 0 #000,
                 -1px  1px 0 #000,
                  1px  1px 0 #000,
-                 0 0 10px rgba(56, 189, 248, 0.7),
+                 0 0 10px rgba(168, 85, 247, 0.7),
                  0 0 20px rgba(99, 102, 241, 0.4);
             opacity: 0.9;
         }
@@ -1091,7 +1114,7 @@
                     <a href="https://dsquareconsulting.com/" target="_blank" rel="noopener noreferrer">
                         <img src="Logos/dsquare-logo.webp" alt="D Square Consulting Services" class="entity-logo" onerror="this.onerror=null;">
                     </a>
-                    <div class="entity-title-wrap">
+                    <div class="company-title-wrap">
                         <h4>AI-ML Apprentice</h4>
                         <div class="date">
                             <a href="https://dsquareconsulting.com/" target="_blank" rel="noopener noreferrer" class="entity-link">D Square Consulting Services Pvt Ltd</a> | May 2026 – Present
@@ -1180,7 +1203,7 @@
                 </div>
                 <p><strong>CGPA:</strong> 9.33 / 10.0</p>
                 <p><strong>Honors:</strong> 1st Place Certificate of Merit (1st Year, 2nd Semester Examinations).
-                    <a href="Certificates/merit-certificate-1st-place.pdf" target="_blank" class="cert-link">📜 View Certificate</a>
+                    <a href="Certificates/merit-certificate-1st-place.pdf" target="_blank" class="cert-link"><span>📜 View Certificate</span></a>
                 </p>
             </div>
 
@@ -1189,16 +1212,16 @@
                 <ul>
                     <li>
                         <strong>Industry Integrated Data Science Workshop:</strong> Exafluence Inc & Sri Venkateswara University (Oct 2025).
-                        <a href="Certificates/exfluence-workshop.pdf" target="_blank" class="cert-link">📜 View Certificate</a>
+                        <a href="Certificates/exfluence-workshop.pdf" target="_blank" class="cert-link"><span>📜 View Certificate</span></a>
                     </li>
                     <li>
                         <strong>NPTEL Elite Certification:</strong> The Joy of Computing Using Python & Problem Solving Through Programming in C.
-                        <a href="Certificates/nptel-python-elite.pdf" target="_blank" class="cert-link">📜 Python</a>
-                        <a href="Certificates/nptel-c-elite.pdf" target="_blank" class="cert-link">📜 C</a>
+                        <a href="Certificates/nptel-python-elite.pdf" target="_blank" class="cert-link"><span>📜 Python</span></a>
+                        <a href="Certificates/nptel-c-elite.pdf" target="_blank" class="cert-link"><span>📜 C</span></a>
                     </li>
                     <li>
                         <strong>Hackathon Participant:</strong> 24-Hour Siddharth #Hackfest2K25, Microsoft Learn Student Chapter.
-                        <a href="Certificates/hackfest2k25.pdf" target="_blank" class="cert-link">📜 View Certificate</a>
+                        <a href="Certificates/hackfest2k25.pdf" target="_blank" class="cert-link"><span>📜 View Certificate</span></a>
                     </li>
                     <li>
                         <strong>Leadership & Coordination:</strong> Coordinated "Artistic Graphs" for Star Techies 2K25 and Spot Events for Siddharth Quest 2K24.
