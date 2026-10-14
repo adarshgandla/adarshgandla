@@ -1743,9 +1743,9 @@
                     <a href="https://ijersem.com/72319-2/" target="_blank" rel="noopener noreferrer" class="btn">
                         <span>📄 View Paper</span>
                     </a>
-                    <button type="button" class="endorse-btn" data-endorse-key="smart_logistics" data-base-count="48">
+                    <button type="button" class="endorse-btn" data-endorse-key="smart_logistics" data-base-count="0">
                         <span>⚡ Endorse</span>
-                        <span class="endorse-count">48</span>
+                        <span class="endorse-count">0</span>
                     </button>
                 </div>
             </div>
@@ -1770,9 +1770,9 @@
                     <li>Performed data cleaning, feature selection, and model evaluation to estimate yield based on soil, climate, and crop features, improving decision support for farmers.</li>
                 </ul>
                 <div class="card-btn-group">
-                    <button type="button" class="endorse-btn" data-endorse-key="agri_ml" data-base-count="31">
+                    <button type="button" class="endorse-btn" data-endorse-key="agri_ml" data-base-count="0">
                         <span>⚡ Endorse</span>
-                        <span class="endorse-count">31</span>
+                        <span class="endorse-count">0</span>
                     </button>
                 </div>
             </div>
@@ -1797,9 +1797,9 @@
                     <li>Prepared datasets, implemented preprocessing pipelines, and supported experimentation of classification models for lesion image analysis.</li>
                 </ul>
                 <div class="card-btn-group">
-                    <button type="button" class="endorse-btn" data-endorse-key="skin_cancer_ai" data-base-count="27">
+                    <button type="button" class="endorse-btn" data-endorse-key="skin_cancer_ai" data-base-count="0">
                         <span>⚡ Endorse</span>
-                        <span class="endorse-count">27</span>
+                        <span class="endorse-count">0</span>
                     </button>
                 </div>
             </div>
@@ -2484,11 +2484,11 @@
         }
         requestAnimationFrame(animateAllStrips);
 
-        // --- 7. $0 PERSISTENT ENDORSEMENT COUNTERS ---
+        // --- 7. $0 PERSISTENT ENDORSEMENT COUNTERS (COUNTERAPI V2) ---
         const COUNTER_NAMESPACE = "adarshgandla_portfolio_2026";
         document.querySelectorAll('.endorse-btn').forEach(btn => {
             const key = btn.dataset.endorseKey;
-            const baseCount = parseInt(btn.dataset.baseCount || "25", 10);
+            const baseCount = parseInt(btn.dataset.baseCount || "0", 10);
             const countEl = btn.querySelector('.endorse-count');
             const storageVotedKey = `endorsed_${key}`;
             const storageCountKey = `count_${key}`;
@@ -2500,11 +2500,12 @@
                 btn.querySelector('span:first-child').textContent = "✓ Endorsed";
             }
 
-            fetch(`https://api.counterapi.dev/v1/${COUNTER_NAMESPACE}/${key}/`)
+            // Updated to v2 endpoint format
+            fetch(`https://api.counterapi.dev/v2/${COUNTER_NAMESPACE}/${key}`)
                 .then(r => r.ok ? r.json() : null)
                 .then(data => {
-                    if (data && typeof data.count === 'number') {
-                        const total = baseCount + data.count;
+                    if (data && typeof data.value === 'number') {
+                        const total = baseCount + data.value;
                         countEl.textContent = total;
                         localStorage.setItem(storageCountKey, total);
                     }
@@ -2527,11 +2528,12 @@
                 btn.querySelector('span:first-child').textContent = "✓ Endorsed";
                 showToast("⚡ Thank you! Your project endorsement is saved.");
 
-                fetch(`https://api.counterapi.dev/v1/${COUNTER_NAMESPACE}/${key}/up`)
+                // Updated to v2 increment endpoint format
+                fetch(`https://api.counterapi.dev/v2/${COUNTER_NAMESPACE}/${key}/up`)
                     .then(r => r.ok ? r.json() : null)
                     .then(data => {
-                        if (data && typeof data.count === 'number') {
-                            const syncedTotal = baseCount + data.count;
+                        if (data && typeof data.value === 'number') {
+                            const syncedTotal = baseCount + data.value;
                             countEl.textContent = syncedTotal;
                             localStorage.setItem(storageCountKey, syncedTotal);
                         }
