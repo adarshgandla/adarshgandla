@@ -720,14 +720,16 @@
             letter-spacing: 0.3px;
         }
 
-        .entity-title-wrap h4 {
+        .entity-title-wrap h4,
+        .company-title-wrap h4 {
             font-size: 1.35rem;
             font-weight: 600;
             color: #ffffff;
             margin-bottom: 3px;
         }
 
-        .entity-title-wrap .date {
+        .entity-title-wrap .date,
+        .company-title-wrap .date {
             color: #cbd5e1;
             font-size: 0.88rem;
             font-style: normal;
@@ -918,6 +920,268 @@
             color: #ffffff;
             transform: translateY(-2px);
             box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+        }
+
+        /* ==========================================================================
+           HORIZONTAL AUTO-SCROLL POP-CARDS ENGINE (SECTIONS A, B, C)
+           ========================================================================== */
+        .pop-strip-block {
+            margin-bottom: clamp(38px, 5vh, 60px);
+            position: relative;
+        }
+
+        .pop-strip-header {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            margin-bottom: 12px;
+            padding: 0 4px;
+        }
+
+        .pop-strip-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: #e2e8f0;
+        }
+
+        .pop-live-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #c084fc;
+            box-shadow: 0 0 10px #c084fc, 0 0 18px #6366f1;
+            animation: dotPulse 2s ease-in-out infinite;
+        }
+
+        .pop-live-dot.green {
+            background: #34d399;
+            box-shadow: 0 0 10px #34d399, 0 0 18px rgba(52, 211, 153, 0.6);
+        }
+
+        @keyframes dotPulse {
+            0%, 100% { transform: scale(1); opacity: 0.95; }
+            50% { transform: scale(1.35); opacity: 0.55; }
+        }
+
+        .h-scroll-wrapper {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            padding: 6px 0 10px;
+            -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+            mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+        }
+
+        .h-scroll-wrapper + .h-scroll-wrapper {
+            margin-top: 6px;
+        }
+
+        .h-scroll-track {
+            display: flex;
+            align-items: stretch;
+            gap: 18px;
+            overflow-x: auto;
+            overflow-y: visible;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            scroll-behavior: auto;
+            padding: 6px 4px;
+            cursor: grab;
+            user-select: none;
+        }
+
+        .h-scroll-track::-webkit-scrollbar {
+            display: none;
+        }
+
+        .h-scroll-track:active {
+            cursor: grabbing;
+        }
+
+        /* Individual Glassmorphic Pop-Card */
+        .pop-card {
+            flex: 0 0 305px;
+            background: var(--glass-bg-95);
+            border: 1px solid var(--glass-border);
+            border-radius: 18px;
+            padding: 18px 20px;
+            position: relative;
+            overflow: hidden;
+            -webkit-backdrop-filter: blur(4px);
+            backdrop-filter: blur(4px);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            text-decoration: none;
+            color: var(--text-main);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.38);
+            transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+                        border-color 0.32s ease,
+                        box-shadow 0.32s ease,
+                        background 0.32s ease;
+        }
+
+        .pop-card:hover,
+        .pop-card:focus-visible {
+            transform: translateY(-7px) scale(1.025);
+            background: var(--glass-hover-50);
+            -webkit-backdrop-filter: blur(14px);
+            backdrop-filter: blur(14px);
+            border-color: rgba(192, 132, 252, 0.55);
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.75), 0 0 22px rgba(168, 85, 247, 0.28);
+            outline: none;
+        }
+
+        /* Private Repo Minimal Card Styling */
+        .pop-card.private-repo-card {
+            border-color: rgba(52, 211, 153, 0.35);
+            background: rgba(10, 22, 18, 0.45);
+            cursor: default;
+        }
+
+        .pop-card.private-repo-card:hover {
+            border-color: rgba(52, 211, 153, 0.7);
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.75), 0 0 22px rgba(52, 211, 153, 0.25);
+        }
+
+        .pop-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 18px;
+            background: radial-gradient(
+                450px circle at var(--mouse-x, -999px) var(--mouse-y, -999px),
+                rgba(168, 85, 247, 0.22),
+                rgba(99, 102, 241, 0.08) 35%,
+                transparent 65%
+            );
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .pop-card:hover::before {
+            opacity: 1;
+        }
+
+        .pop-card > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        .pop-card-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .pop-badge {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            padding: 3px 11px;
+            border-radius: 50px;
+            background: rgba(168, 85, 247, 0.14);
+            border: 1px solid rgba(192, 132, 252, 0.35);
+            color: #e9d5ff;
+            white-space: nowrap;
+        }
+
+        .pop-badge.active-push {
+            background: rgba(52, 211, 153, 0.16);
+            border-color: rgba(52, 211, 153, 0.55);
+            color: #a7f3d0;
+        }
+
+        .pop-icon {
+            font-size: 1.25rem;
+            line-height: 1;
+            filter: drop-shadow(0 0 8px rgba(192, 132, 252, 0.5));
+        }
+
+        .pop-card h5 {
+            font-size: 1.08rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 5px;
+            line-height: 1.3;
+            word-break: break-word;
+        }
+
+        .pop-card p {
+            font-size: 0.84rem;
+            color: #cbd5e1;
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .pop-card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            font-size: 0.78rem;
+            color: #c084fc;
+            font-weight: 600;
+        }
+
+        .pop-card-footer span.action-text {
+            background: linear-gradient(90deg, #c084fc, #38bdf8, #c084fc);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: subtleColorShift 5s linear infinite;
+        }
+
+        /* Persistent Endorse / Reaction Button on Cards */
+        .endorse-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 0.55rem 1.25rem;
+            border-radius: 50px;
+            background: rgba(168, 85, 247, 0.1);
+            border: 1px solid rgba(192, 132, 252, 0.35);
+            color: #f1f5f9;
+            font-size: 0.84rem;
+            font-weight: 600;
+            cursor: pointer;
+            -webkit-backdrop-filter: blur(8px);
+            backdrop-filter: blur(8px);
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .endorse-btn:hover {
+            background: rgba(168, 85, 247, 0.25);
+            border-color: #c084fc;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 16px rgba(168, 85, 247, 0.4);
+        }
+
+        .endorse-btn.endorsed {
+            background: rgba(52, 211, 153, 0.16);
+            border-color: rgba(52, 211, 153, 0.6);
+            color: #a7f3d0;
+        }
+
+        .endorse-count {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1px 8px;
+            border-radius: 20px;
+            font-size: 0.76rem;
+            color: #ffffff;
         }
 
         /* Final Art Showcase Buffer */
@@ -1117,6 +1381,10 @@
                 min-height: 65vh;
                 padding-bottom: 25px;
             }
+
+            .pop-card {
+                flex: 0 0 265px;
+            }
         }
     </style>
 </head>
@@ -1214,6 +1482,177 @@
     </header>
 
     <div class="container">
+
+        <!-- ==================== SECTION A: DUAL-ROW OPPOSITE-DIRECTION HIGHLIGHTS ==================== -->
+        <div class="pop-strip-block fade-in" aria-label="Engineering and Career Highlights">
+            <div class="pop-strip-header">
+                <div class="pop-strip-label">
+                    <span class="pop-live-dot"></span>
+                    <span>Engineering & Career Highlights</span>
+                </div>
+            </div>
+
+            <!-- ROW 1: GLIDES LEFT -->
+            <div class="h-scroll-wrapper" data-strip-id="highlights-row-1" data-direction="1" data-speed="0.52">
+                <div class="h-scroll-track">
+                    <a href="#experience" class="pop-card">
+                        <div>
+                            <div class="pop-card-top">
+                                <span class="pop-badge">Current Role</span>
+                                <span class="pop-icon">💼</span>
+                            </div>
+                            <h5>AI-ML Apprentice @ D Square</h5>
+                            <p>Engineering scalable Python ML/DL pipelines & combinatorial Google OR-Tools routing engines.</p>
+                        </div>
+                        <div class="pop-card-footer">
+                            <span>May 2026 – Present</span>
+                            <span class="action-text">Explore Role →</span>
+                        </div>
+                    </a>
+
+                    <a href="#projects" class="pop-card">
+                        <div>
+                            <div class="pop-card-top">
+                                <span class="pop-badge">Published Author</span>
+                                <span class="pop-icon">📄</span>
+                            </div>
+                            <h5>IJERSEM Journal Publication</h5>
+                            <p>Peer-reviewed research on Deep Learning-Based Route Optimization & Demand Forecasting.</p>
+                        </div>
+                        <div class="pop-card-footer">
+                            <span>Smart Logistics V4</span>
+                            <span class="action-text">Read Details →</span>
+                        </div>
+                    </a>
+
+                    <a href="#education" class="pop-card">
+                        <div>
+                            <div class="pop-card-top">
+                                <span class="pop-badge">Academic Distinction</span>
+                                <span class="pop-icon">🎓</span>
+                            </div>
+                            <h5>9.33 / 10.0 B.Tech CGPA</h5>
+                            <p>Computer Science & Engineering at SISTK Puttur with 1st Place Certificate of Merit.</p>
+                        </div>
+                        <div class="pop-card-footer">
+                            <span>2022 – May 2026</span>
+                            <span class="action-text">View Honors →</span>
+                        </div>
+                    </a>
+
+                    <a href="#experience" class="pop-card">
+                        <div>
+                            <div class="pop-card-top">
+                                <span class="pop-badge">Track Record</span>
+                                <span class="pop-icon">⚡</span>
+                            </div>
+                            <h5>4x Industry Internships</h5>
+                            <p>Hands-on delivery across D Square Consulting, EduNoVerse, VaultofCodes & Pantech e Learning.</p>
+                        </div>
+                        <div class="pop-card-footer">
+                            <span>AI/ML • Data • Java</span>
+                            <span class="action-text">View Timeline →</span>
+                        </div>
+                    </a>
+
+                    <a href="#projects" class="pop-card">
+                        <div>
+                            <div class="pop-card-top">
+                                <span class="pop-badge">Production & AI</span>
+                                <span class="pop-icon">🚀</span>
+                            </div>
+                            <h5>3+ End-to-End ML Systems</h5>
+                            <p>Cloud-native Smart Logistics platform, Agri-ML Crop Yield Predictor, and Skin Lesion AI.</p>
+                        </div>
+                        <div class="pop-card-footer">
+                            <span>Live Deployments</span>
+                            <span class="action-text">See Builds →</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- ROW 2: GLIDES RIGHT -->
+            <div class="h-scroll-wrapper" data-strip-id="highlights-row-2" data-direction="-1" data-speed="0.52">
+                <div class="h-scroll-track">
+                    <a href="#skills" class="pop-card">
+                        <div>
+                            <div class="pop-card-top">
+                                <span class="pop-badge">Domain Focus</span>
+                                <span class="pop-icon">🧠</span>
+                            </div>
+                            <h5>CI-Logistics & Optimization</h5>
+                            <p>Combining TensorFlow LSTM time-series forecasting with TSP/VRP mathematical solvers.</p>
+                        </div>
+                        <div class="pop-card-footer">
+                            <span>Core Architecture</span>
+                            <span class="action-text">View Stack →</span>
+                        </div>
+                    </a>
+
+                    <a href="#projects" class="pop-card">
+                        <div>
+                            <div class="pop-card-top">
+                                <span class="pop-badge">Google OR-Tools</span>
+                                <span class="pop-icon">🛰️</span>
+                            </div>
+                            <h5>Combinatorial VRP / TSP</h5>
+                            <p>Multi-constraint vehicle routing engines engineered for distance, cost & carbon reduction.</p>
+                        </div>
+                        <div class="pop-card-footer">
+                            <span>Mathematical Optimization</span>
+                            <span class="action-text">See Engine →</span>
+                        </div>
+                    </a>
+
+                    <a href="#projects" class="pop-card">
+                        <div>
+                            <div class="pop-card-top">
+                                <span class="pop-badge">TensorFlow • LSTM</span>
+                                <span class="pop-icon">📈</span>
+                            </div>
+                            <h5>Spatial Demand Forecasting</h5>
+                            <p>Deep recurrent neural architectures predicting regional inventory and delivery surges.</p>
+                        </div>
+                        <div class="pop-card-footer">
+                            <span>Time-Series DL</span>
+                            <span class="action-text">View Model →</span>
+                        </div>
+                    </a>
+
+                    <a href="#projects" class="pop-card">
+                        <div>
+                            <div class="pop-card-top">
+                                <span class="pop-badge">Scikit-Learn • RF</span>
+                                <span class="pop-icon">🌾</span>
+                            </div>
+                            <h5>Predictive Agri-Analytics</h5>
+                            <p>Random Forest Regression pipelines modeling soil, climate, and historical crop yields.</p>
+                        </div>
+                        <div class="pop-card-footer">
+                            <span>Decision Support</span>
+                            <span class="action-text">View Project →</span>
+                        </div>
+                    </a>
+
+                    <a href="#education" class="pop-card">
+                        <div>
+                            <div class="pop-card-top">
+                                <span class="pop-badge">IIT / NPTEL Elite</span>
+                                <span class="pop-icon">🏅</span>
+                            </div>
+                            <h5>Certified Python & C</h5>
+                            <p>NPTEL Elite credentials alongside 24-Hour Microsoft Learn #Hackfest2K25 participation.</p>
+                        </div>
+                        <div class="pop-card-footer">
+                            <span>Verified Credentials</span>
+                            <span class="action-text">Inspect Vault →</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
         <section id="about" class="fade-in">
             <h3>Professional Summary</h3>
             <p>Machine Learning Engineer with hands-on experience developing and fine-tuning computational intelligence systems. Specializing in Python backend integration, Google OR-Tools optimization frameworks, and time-series forecasting with LSTM architectures. Dedicated to building reliable, eco-efficient algorithms and high-throughput data models that solve intricate logistical and predictive bottlenecks.</p>
@@ -1304,6 +1743,10 @@
                     <a href="https://ijersem.com/72319-2/" target="_blank" rel="noopener noreferrer" class="btn">
                         <span>📄 View Paper</span>
                     </a>
+                    <button type="button" class="endorse-btn" data-endorse-key="smart_logistics" data-base-count="48">
+                        <span>⚡ Endorse</span>
+                        <span class="endorse-count">48</span>
+                    </button>
                 </div>
             </div>
 
@@ -1326,6 +1769,12 @@
                     <li>Built a crop yield prediction model in Python using Random Forest Regression on historical agricultural and environmental data.</li>
                     <li>Performed data cleaning, feature selection, and model evaluation to estimate yield based on soil, climate, and crop features, improving decision support for farmers.</li>
                 </ul>
+                <div class="card-btn-group">
+                    <button type="button" class="endorse-btn" data-endorse-key="agri_ml" data-base-count="31">
+                        <span>⚡ Endorse</span>
+                        <span class="endorse-count">31</span>
+                    </button>
+                </div>
             </div>
 
             <!-- Skin Cancer Detection -->
@@ -1347,6 +1796,42 @@
                     <li>Provided data processing and programming assistance for a faculty-led research paper on machine learning based early skin cancer detection.</li>
                     <li>Prepared datasets, implemented preprocessing pipelines, and supported experimentation of classification models for lesion image analysis.</li>
                 </ul>
+                <div class="card-btn-group">
+                    <button type="button" class="endorse-btn" data-endorse-key="skin_cancer_ai" data-base-count="27">
+                        <span>⚡ Endorse</span>
+                        <span class="endorse-count">27</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- ==================== SECTION C: ALL PUBLIC REPOS + LAST 48H PRIVATE REPO PULSE ==================== -->
+            <div class="pop-strip-block" style="margin-top: 32px; margin-bottom: 0;">
+                <div class="pop-strip-header">
+                    <div class="pop-strip-label">
+                        <span class="pop-live-dot green"></span>
+                        <span id="ghPulseStatus">Live GitHub Activity & All Public Repositories</span>
+                    </div>
+                </div>
+
+                <div class="h-scroll-wrapper" data-strip-id="github" data-direction="1" data-speed="0.48">
+                    <div class="h-scroll-track" id="githubPopTrack">
+                        <!-- Default Curated Cards (Automatically sorted & populated with all public repos + 48h private activity) -->
+                        <a href="https://smart-logistics-v4.vercel.app" target="_blank" rel="noopener noreferrer" class="pop-card">
+                            <div>
+                                <div class="pop-card-top">
+                                    <span class="pop-badge">Python • OR-Tools</span>
+                                    <span class="pop-icon">🛰️</span>
+                                </div>
+                                <h5>Smart-Logistics-V4</h5>
+                                <p>Cloud-native AI route optimization (TSP/VRP) and TensorFlow LSTM demand forecasting engine.</p>
+                            </div>
+                            <div class="pop-card-footer">
+                                <span>★ Production Live</span>
+                                <span class="action-text">Launch App ↗</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -1493,6 +1978,110 @@
                     </li>
                 </ul>
             </div>
+
+            <!-- ==================== SECTION B: CREDENTIALS & HONORS POP-CARDS VAULT ==================== -->
+            <div class="pop-strip-block" style="margin-top: 28px; margin-bottom: 0;">
+                <div class="pop-strip-header">
+                    <div class="pop-strip-label">
+                        <span class="pop-live-dot"></span>
+                        <span>Verified Credentials & Honors Vault</span>
+                    </div>
+                </div>
+
+                <div class="h-scroll-wrapper" data-strip-id="certs" data-direction="-1" data-speed="0.5">
+                    <div class="h-scroll-track">
+                        <a href="Certificates/merit-certificate-1st-place.pdf" target="_blank" class="pop-card">
+                            <div>
+                                <div class="pop-card-top">
+                                    <span class="pop-badge">1st Place Honor</span>
+                                    <span class="pop-icon">🏆</span>
+                                </div>
+                                <h5>Certificate of Merit (Rank 1)</h5>
+                                <p>Awarded 1st Place in B.Tech CSE 1st Year, 2nd Semester Examinations at SISTK Puttur.</p>
+                            </div>
+                            <div class="pop-card-footer">
+                                <span>SISTK Puttur</span>
+                                <span class="action-text">📜 Open PDF ↗</span>
+                            </div>
+                        </a>
+
+                        <a href="Certificates/exfluence-workshop.pdf" target="_blank" class="pop-card">
+                            <div>
+                                <div class="pop-card-top">
+                                    <span class="pop-badge">Oct 2025</span>
+                                    <span class="pop-icon">📊</span>
+                                </div>
+                                <h5>Industry Integrated Data Science</h5>
+                                <p>Intensive workshop by Exafluence Inc & Sri Venkateswara University on enterprise analytics.</p>
+                            </div>
+                            <div class="pop-card-footer">
+                                <span>Exafluence & SVU</span>
+                                <span class="action-text">📜 Open PDF ↗</span>
+                            </div>
+                        </a>
+
+                        <a href="Certificates/nptel-python-elite.pdf" target="_blank" class="pop-card">
+                            <div>
+                                <div class="pop-card-top">
+                                    <span class="pop-badge">NPTEL Elite</span>
+                                    <span class="pop-icon">🐍</span>
+                                </div>
+                                <h5>The Joy of Computing Using Python</h5>
+                                <p>Elite-tier certification in algorithmic problem solving, data structures, and Python design.</p>
+                            </div>
+                            <div class="pop-card-footer">
+                                <span>IIT / NPTEL</span>
+                                <span class="action-text">📜 Open PDF ↗</span>
+                            </div>
+                        </a>
+
+                        <a href="Certificates/nptel-c-elite.pdf" target="_blank" class="pop-card">
+                            <div>
+                                <div class="pop-card-top">
+                                    <span class="pop-badge">NPTEL Elite</span>
+                                    <span class="pop-icon">⚙️</span>
+                                </div>
+                                <h5>Problem Solving in C</h5>
+                                <p>Elite certification in memory management, pointers, low-level algorithms, and C programming.</p>
+                            </div>
+                            <div class="pop-card-footer">
+                                <span>IIT / NPTEL</span>
+                                <span class="action-text">📜 Open PDF ↗</span>
+                            </div>
+                        </a>
+
+                        <a href="Certificates/hackfest2k25.pdf" target="_blank" class="pop-card">
+                            <div>
+                                <div class="pop-card-top">
+                                    <span class="pop-badge">24-Hr Hackathon</span>
+                                    <span class="pop-icon">💻</span>
+                                </div>
+                                <h5>Siddharth #Hackfest2K25</h5>
+                                <p>24-hour intensive engineering sprint hosted by the Microsoft Learn Student Chapter.</p>
+                            </div>
+                            <div class="pop-card-footer">
+                                <span>Microsoft Learn</span>
+                                <span class="action-text">📜 Open PDF ↗</span>
+                            </div>
+                        </a>
+
+                        <a href="#education" class="pop-card">
+                            <div>
+                                <div class="pop-card-top">
+                                    <span class="pop-badge">Leadership</span>
+                                    <span class="pop-icon">🎯</span>
+                                </div>
+                                <h5>Technical Event Coordinator</h5>
+                                <p>Directed "Artistic Graphs" at Star Techies 2K25 & Spot Events at Siddharth Quest 2K24.</p>
+                            </div>
+                            <div class="pop-card-footer">
+                                <span>Campus Leadership</span>
+                                <span class="action-text">Verified Role ✓</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </section>
     </div>
 
@@ -1605,6 +2194,7 @@
             ctx.drawImage(img, offsetX, offsetY, renderWidth, renderHeight);
         }
 
+        let lastVerticalScrollTime = 0;
         function drawCurrentFrame() {
             const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
             const scrollProgress = maxScroll > 0 ? Math.min(Math.max(window.scrollY / maxScroll, 0), 1) : 0;
@@ -1619,8 +2209,9 @@
         }
 
         window.addEventListener('scroll', () => {
+            lastVerticalScrollTime = performance.now();
             window.requestAnimationFrame(drawCurrentFrame);
-        });
+        }, { passive: true });
 
         resizeCanvas();
 
@@ -1643,7 +2234,7 @@
                 if (!isAutoScrolling) return;
 
                 if (window.scrollY < maxScroll - 4) {
-                    window.scrollBy(2, scrollSpeed);
+                    window.scrollBy(0, scrollSpeed);
                     requestAnimationFrame(step);
                 } else {
                     isAutoScrolling = false;
@@ -1679,18 +2270,23 @@
 
         resetIdleTimer();
 
-        // --- 4. CARD SPOTLIGHT HOVER EFFECT ---
-        const cards = document.querySelectorAll('.card');
-        cards.forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
+        // --- 4. CARD & POP-CARD SPOTLIGHT HOVER EFFECT ---
+        function attachSpotlightListeners(root = document) {
+            const spotlightTargets = root.querySelectorAll('.card, .pop-card');
+            spotlightTargets.forEach(card => {
+                if (card.dataset.spotlightBound) return;
+                card.dataset.spotlightBound = "true";
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
 
-                card.style.setProperty('--mouse-x', `${x}px`);
-                card.style.setProperty('--mouse-y', `${y}px`);
+                    card.style.setProperty('--mouse-x', `${x}px`);
+                    card.style.setProperty('--mouse-y', `${y}px`);
+                });
             });
-        });
+        }
+        attachSpotlightListeners();
 
         // --- 5. INTERSECTION OBSERVER FOR FADE-IN SECTIONS ---
         const observer = new IntersectionObserver((entries) => {
@@ -1704,6 +2300,402 @@
         document.querySelectorAll('.fade-in').forEach((section) => {
             observer.observe(section);
         });
+
+        // --- 6. PRECISION HORIZONTAL POP-CARDS CONTROLLER (AUTO + HOVER WHEEL + KEYBOARD) ---
+        const stripControllers = new Map();
+        let hoveredStripId = null;
+
+        function initHorizontalStrip(wrapper) {
+            const id = wrapper.dataset.stripId;
+            const track = wrapper.querySelector('.h-scroll-track');
+            const baseDirection = parseFloat(wrapper.dataset.direction || "1");
+            const baseSpeed = parseFloat(wrapper.dataset.speed || "0.5");
+
+            // Clone children once for seamless infinite loop
+            const originalCards = Array.from(track.children);
+            originalCards.forEach(card => {
+                const clone = card.cloneNode(true);
+                clone.setAttribute('aria-hidden', 'true');
+                track.appendChild(clone);
+            });
+            attachSpotlightListeners(track);
+
+            const state = {
+                id,
+                wrapper,
+                track,
+                baseDirection,
+                baseSpeed,
+                pos: 0,
+                manualVelocity: 0,
+                isHovered: false,
+                hoverEnterTime: 0,
+                isTouching: false,
+                pauseUntil: 0,
+                visibleRatio: 0
+            };
+
+            // Start reverse strips at midpoint so they can glide right immediately
+            requestAnimationFrame(() => {
+                const half = track.scrollWidth / 2;
+                if (baseDirection < 0 && half > 0) {
+                    state.pos = half / 2;
+                    track.scrollLeft = state.pos;
+                }
+            });
+
+            wrapper.addEventListener('mouseenter', () => {
+                state.isHovered = true;
+                state.hoverEnterTime = performance.now();
+                hoveredStripId = id;
+                wrapper.classList.add('active-strip');
+            });
+
+            wrapper.addEventListener('mouseleave', () => {
+                state.isHovered = false;
+                if (hoveredStripId === id) hoveredStripId = null;
+                wrapper.classList.remove('active-strip');
+            });
+
+            // Touch support on mobile without fighting native swipe
+            track.addEventListener('touchstart', () => {
+                state.isTouching = true;
+                state.manualVelocity = 0;
+                state.pos = track.scrollLeft;
+            }, { passive: true });
+
+            track.addEventListener('touchmove', () => {
+                state.pos = track.scrollLeft;
+            }, { passive: true });
+
+            track.addEventListener('touchend', () => {
+                state.isTouching = false;
+                state.pos = track.scrollLeft;
+                state.pauseUntil = performance.now() + 1400;
+            }, { passive: true });
+
+            // Precision Wheel Handler:
+            // Never hijacks normal vertical page scroll if the page is actively scrolling.
+            // Converts wheel to horizontal card glide ONLY when user rests pointer on the strip.
+            wrapper.addEventListener('wheel', (e) => {
+                const now = performance.now();
+                const isHorizontalSwipe = Math.abs(e.deltaX) > Math.abs(e.deltaY);
+                const pageRecentlyScrolled = (now - lastVerticalScrollTime) < 220;
+                const pointerRestedOnStrip = state.isHovered && (now - state.hoverEnterTime) > 150;
+
+                if (isHorizontalSwipe || (pointerRestedOnStrip && !pageRecentlyScrolled)) {
+                    e.preventDefault();
+                    stopAutoScrollOnUserInteraction();
+                    const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+                    state.manualVelocity += delta * 0.24;
+                    state.pauseUntil = now + 1400;
+                }
+            }, { passive: false });
+
+            stripControllers.set(id, state);
+        }
+
+        document.querySelectorAll('.h-scroll-wrapper').forEach(initHorizontalStrip);
+
+        // Track which horizontal strip is currently in the active viewport for keyboard arrows
+        const stripVisibilityObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const id = entry.target.dataset.stripId;
+                const ctrl = stripControllers.get(id);
+                if (ctrl) {
+                    ctrl.visibleRatio = entry.intersectionRatio;
+                }
+            });
+        }, { threshold: [0, 0.25, 0.5, 0.75, 1] });
+
+        document.querySelectorAll('.h-scroll-wrapper').forEach(w => stripVisibilityObserver.observe(w));
+
+        function getActiveStripForKeyboard() {
+            if (hoveredStripId && stripControllers.has(hoveredStripId)) {
+                return stripControllers.get(hoveredStripId);
+            }
+            let bestCtrl = null;
+            let bestScore = Infinity;
+            const viewportCenter = window.innerHeight / 2;
+
+            stripControllers.forEach(ctrl => {
+                if (ctrl.visibleRatio >= 0.35) {
+                    const rect = ctrl.wrapper.getBoundingClientRect();
+                    const stripCenter = rect.top + rect.height / 2;
+                    const dist = Math.abs(stripCenter - viewportCenter);
+                    if (dist < bestScore) {
+                        bestScore = dist;
+                        bestCtrl = ctrl;
+                    }
+                }
+            });
+            return bestCtrl;
+        }
+
+        function impulseStrip(ctrl, directionMultiplier) {
+            if (!ctrl) return;
+            stopAutoScrollOnUserInteraction();
+            ctrl.manualVelocity += directionMultiplier * 26;
+            ctrl.pauseUntil = performance.now() + 1600;
+        }
+
+        // Keyboard Left / Right Arrow handler (never touches Up/Down/PageUp/PageDown/Space)
+        window.addEventListener('keydown', (e) => {
+            if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+            if (['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement?.tagName)) return;
+
+            const targetCtrl = getActiveStripForKeyboard();
+            if (!targetCtrl) return;
+
+            e.preventDefault();
+            const dir = e.key === 'ArrowRight' ? 1 : -1;
+            impulseStrip(targetCtrl, dir);
+        });
+
+        // Master 60fps Infinite Scroll & Momentum Loop
+        function animateAllStrips(now) {
+            stripControllers.forEach(ctrl => {
+                const { track, isHovered, isTouching, pauseUntil, baseDirection, baseSpeed } = ctrl;
+                if (isTouching) return;
+
+                const halfWidth = track.scrollWidth / 2;
+                if (halfWidth <= 0) return;
+
+                if (Math.abs(ctrl.manualVelocity) > 0.15) {
+                    ctrl.pos += ctrl.manualVelocity;
+                    ctrl.manualVelocity *= 0.88; // Smooth friction decay
+                } else {
+                    ctrl.manualVelocity = 0;
+                    if (!isHovered && now > pauseUntil) {
+                        ctrl.pos += baseSpeed * baseDirection;
+                    }
+                }
+
+                // Seamless wrap-around across cloned midpoint
+                if (ctrl.pos >= halfWidth) {
+                    ctrl.pos -= halfWidth;
+                } else if (ctrl.pos < 0) {
+                    ctrl.pos += halfWidth;
+                }
+
+                track.scrollLeft = ctrl.pos;
+            });
+            requestAnimationFrame(animateAllStrips);
+        }
+        requestAnimationFrame(animateAllStrips);
+
+        // --- 7. $0 PERSISTENT ENDORSEMENT COUNTERS ---
+        const COUNTER_NAMESPACE = "adarshgandla_portfolio_2026";
+        document.querySelectorAll('.endorse-btn').forEach(btn => {
+            const key = btn.dataset.endorseKey;
+            const baseCount = parseInt(btn.dataset.baseCount || "25", 10);
+            const countEl = btn.querySelector('.endorse-count');
+            const storageVotedKey = `endorsed_${key}`;
+            const storageCountKey = `count_${key}`;
+
+            const cachedCount = parseInt(localStorage.getItem(storageCountKey) || baseCount, 10);
+            countEl.textContent = cachedCount;
+            if (localStorage.getItem(storageVotedKey) === "true") {
+                btn.classList.add('endorsed');
+                btn.querySelector('span:first-child').textContent = "✓ Endorsed";
+            }
+
+            fetch(`https://api.counterapi.dev/v1/${COUNTER_NAMESPACE}/${key}/`)
+                .then(r => r.ok ? r.json() : null)
+                .then(data => {
+                    if (data && typeof data.count === 'number') {
+                        const total = baseCount + data.count;
+                        countEl.textContent = total;
+                        localStorage.setItem(storageCountKey, total);
+                    }
+                })
+                .catch(() => {});
+
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (localStorage.getItem(storageVotedKey) === "true") {
+                    showToast("✨ You've already endorsed this project — thank you!");
+                    return;
+                }
+
+                const currentVal = parseInt(countEl.textContent, 10) || baseCount;
+                const nextVal = currentVal + 1;
+                countEl.textContent = nextVal;
+                localStorage.setItem(storageVotedKey, "true");
+                localStorage.setItem(storageCountKey, nextVal);
+                btn.classList.add('endorsed');
+                btn.querySelector('span:first-child').textContent = "✓ Endorsed";
+                showToast("⚡ Thank you! Your project endorsement is saved.");
+
+                fetch(`https://api.counterapi.dev/v1/${COUNTER_NAMESPACE}/${key}/up`)
+                    .then(r => r.ok ? r.json() : null)
+                    .then(data => {
+                        if (data && typeof data.count === 'number') {
+                            const syncedTotal = baseCount + data.count;
+                            countEl.textContent = syncedTotal;
+                            localStorage.setItem(storageCountKey, syncedTotal);
+                        }
+                    })
+                    .catch(() => {});
+            });
+        });
+
+        // --- 8. ALL PUBLIC REPOS + LAST 48H PRIVATE REPO PULSE (SORTED BY LATEST TIMESTAMP) ---
+        function formatRelativeTime(timestampMs) {
+            const diffMs = Date.now() - timestampMs;
+            const hours = Math.max(1, Math.floor(diffMs / (1000 * 60 * 60)));
+            if (hours < 24) return `${hours}h ago`;
+            const days = Math.floor(hours / 24);
+            if (days <= 2) return `${days}d ago`;
+            return new Date(timestampMs).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        }
+
+        async function syncLiveGitHubRepos() {
+            const GITHUB_USER = "adarshgandla";
+            const CACHE_KEY = "adarshgandla_gh_all_repos_v4";
+            const CACHE_TTL = 10 * 60 * 1000; // 10 minutes
+            const TWO_DAYS_MS = 48 * 60 * 60 * 1000;
+            const statusEl = document.getElementById('ghPulseStatus');
+
+            try {
+                let publicRepos = null;
+                const cachedRaw = localStorage.getItem(CACHE_KEY);
+                if (cachedRaw) {
+                    const parsed = JSON.parse(cachedRaw);
+                    if (Date.now() - parsed.timestamp < CACHE_TTL && Array.isArray(parsed.data)) {
+                        publicRepos = parsed.data;
+                    }
+                }
+
+                // 1. Fetch ALL public repositories
+                if (!publicRepos) {
+                    let res = await fetch(`https://api.github.com/users/${GITHUB_USER}/repos?per_page=100&sort=updated&direction=desc`);
+                    if (!res.ok) {
+                        res = await fetch("https://api.github.com/users/adarsh-gandla/repos?per_page=100&sort=updated&direction=desc");
+                    }
+                    if (res.ok) {
+                        const fetched = await res.json();
+                        if (Array.isArray(fetched) && fetched.length > 0) {
+                            publicRepos = fetched;
+                            localStorage.setItem(CACHE_KEY, JSON.stringify({
+                                timestamp: Date.now(),
+                                data: publicRepos
+                            }));
+                        }
+                    }
+                }
+
+                // 2. Fetch 48h private repo pulse from orphan activity-data branch
+                let recentPrivateRepos = [];
+                try {
+                    let privRes = await fetch(
+                        `https://raw.githubusercontent.com/${GITHUB_USER}/${GITHUB_USER}/activity-data/gh-activity.json`,
+                        { cache: "no-store" }
+                    );
+                    if (!privRes.ok) {
+                        privRes = await fetch(
+                            `https://raw.githubusercontent.com/${GITHUB_USER}/${GITHUB_USER}.github.io/activity-data/gh-activity.json`,
+                            { cache: "no-store" }
+                        );
+                    }
+                    if (privRes.ok) {
+                        const privData = await privRes.json();
+                        if (Array.isArray(privData.private_repos)) {
+                            recentPrivateRepos = privData.private_repos.filter(r => {
+                                const ts = new Date(r.pushed_at || r.updated_at).getTime();
+                                return (Date.now() - ts) <= TWO_DAYS_MS;
+                            });
+                        }
+                    }
+                } catch (_) {}
+
+                if (publicRepos && publicRepos.length > 0) {
+                    const track = document.getElementById('githubPopTrack');
+                    const ghCtrl = stripControllers.get('github');
+                    if (!track || !ghCtrl) return;
+
+                    const combinedItems = [
+                        ...recentPrivateRepos.map(r => ({
+                            name: r.name,
+                            isPrivate: true,
+                            timestamp: new Date(r.pushed_at || r.updated_at).getTime()
+                        })),
+                        ...publicRepos.map(r => ({
+                            name: r.name,
+                            isPrivate: false,
+                            html_url: r.html_url,
+                            language: r.language || "Repository",
+                            stargazers_count: r.stargazers_count || 0,
+                            description: r.description,
+                            timestamp: Math.max(
+                                new Date(r.pushed_at || 0).getTime(),
+                                new Date(r.updated_at || 0).getTime()
+                            )
+                        }))
+                    ];
+
+                    // Order strictly by latest GitHub update / push timestamp descending
+                    combinedItems.sort((a, b) => b.timestamp - a.timestamp);
+
+                    const cardsHtml = combinedItems.map(item => {
+                        const isRecent48h = (Date.now() - item.timestamp) <= TWO_DAYS_MS;
+                        const timeLabel = formatRelativeTime(item.timestamp);
+
+                        // Private Repo Card: Name + active timestamp only
+                        if (item.isPrivate) {
+                            return `
+                                <div class="pop-card private-repo-card">
+                                    <div>
+                                        <div class="pop-card-top">
+                                            <span class="pop-badge active-push">🔒 Private Repo • Active</span>
+                                            <span class="pop-icon">⚡</span>
+                                        </div>
+                                        <h5>${item.name}</h5>
+                                        <p>Active private repository push recorded within the last 48 hours.</p>
+                                    </div>
+                                    <div class="pop-card-footer">
+                                        <span>🟢 Pushed ${timeLabel}</span>
+                                        <span class="action-text">Private Build</span>
+                                    </div>
+                                </div>
+                            `;
+                        }
+
+                        const desc = item.description
+                            ? (item.description.length > 88 ? item.description.slice(0, 85) + "..." : item.description)
+                            : "Public repository & source codebase by Adarsh Gandla.";
+
+                        return `
+                            <a href="${item.html_url}" target="_blank" rel="noopener noreferrer" class="pop-card">
+                                <div>
+                                    <div class="pop-card-top">
+                                        <span class="pop-badge ${isRecent48h ? 'active-push' : ''}">${isRecent48h ? '🟢 Active • ' + item.language : item.language}</span>
+                                        <span class="pop-icon">📦</span>
+                                    </div>
+                                    <h5>${item.name}</h5>
+                                    <p>${desc}</p>
+                                </div>
+                                <div class="pop-card-footer">
+                                    <span>${isRecent48h ? '🟢 Pushed ' + timeLabel : 'Updated ' + timeLabel}${item.stargazers_count > 0 ? ' • ★ ' + item.stargazers_count : ''}</span>
+                                    <span class="action-text">GitHub Repo ↗</span>
+                                </div>
+                            </a>
+                        `;
+                    }).join('');
+
+                    track.innerHTML = cardsHtml + cardsHtml;
+                    attachSpotlightListeners(track);
+
+                    if (statusEl) {
+                        const active48hCount = combinedItems.filter(i => (Date.now() - i.timestamp) <= TWO_DAYS_MS).length;
+                        statusEl.textContent = active48hCount > 0
+                            ? `Live GitHub Activity (${publicRepos.length} Public Repos • ${active48hCount} Pushed in Last 48h)`
+                            : `Live GitHub Repositories (${publicRepos.length} Public Repos Ordered by Latest Update)`;
+                    }
+                }
+            } catch (err) {}
+        }
+        syncLiveGitHubRepos();
     </script>
 </body>
 </html>
